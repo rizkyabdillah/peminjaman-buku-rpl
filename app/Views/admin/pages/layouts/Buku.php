@@ -1,45 +1,45 @@
-<?= $this->extend('admin/partials/master') ?>
+<?= $this->extend('admin/partials/index-table') ?>
 
-<?= $this->section('layouts-contents') ?>
-
-
-<div class="row">
-    <div class="col-12 col-md-6 col-lg-12">
-        <div class="card card-primary">
-            <div class="card-header">
-                <div class="card-header-action float-right">
-                    <a href="<?= route_to('view_add_jalur'); ?>" class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        Tambah Data
+<?= $this->section('table-contents') ?>
+<table class="table table-striped" id="table-descending">
+    <thead>
+        <tr>
+            <th>Nama Buku</th>
+            <th>Kategori</th>
+            <th>Penerbit</th>
+            <th>Pengarang</th>
+            <th class="text-center" style="width: 8;">Jumlah Hlm</th>
+            <th class="text-center">Gambar</th>
+            <th class="text-center" style="width: 12;">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($dataset as $i) :
+            $arr = array_values($i);
+        ?>
+            <tr>
+                <?php for ($j = 1; $j < count($arr) - 1; $j++) : ?>
+                    <td><?= $arr[$j]; ?></td>
+                <?php endfor ?>
+                <td><img src="<?= base_url(); ?>/<?= $arr[count($arr) - 1]; ?>" width="70" height="90"></td>
+                <td class="text-center">
+                    <a href="<?= route_to('view_edit_buku', $arr[0]); ?>" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Ubah">
+                        <i class="fas fa-pencil-alt"></i>
                     </a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="table-descending">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 15%;">
-                                    Test
-                                </th>
-                                <th>Test</th>
-                                <th>Test</th>
-                                <th class="text-center" style="width: 20%;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <a data-id="<?= $arr[0]; ?>" class="btn btn-danger btn-action mr-1 ml-1 swal_confirm" data-toggle="tooltip" data-original-title="Hapus">
+                        <form action="<?= route_to('delete_buku', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE" />
+                        </form>
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
 
 <?= $this->endSection(); ?>
-
-
 
 <!-- Section CSS -->
 <?= $this->section('page_css'); ?>
