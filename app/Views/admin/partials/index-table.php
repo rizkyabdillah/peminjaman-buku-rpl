@@ -9,7 +9,7 @@
             <div class="card-header">
                 <div class="card-header-action float-right">
                     <a href="<?= $link_add ?>" class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
+                        <!-- <i class="fas fa-plus"></i> -->
                         Tambah Data
                     </a>
                 </div>

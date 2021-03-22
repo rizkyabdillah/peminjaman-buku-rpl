@@ -4,13 +4,14 @@
 <table class="table table-striped" id="table-descending">
     <thead>
         <tr>
+            <th class="text-center">ID</th>
             <th>Nama Buku</th>
             <th>Kategori</th>
             <th>Penerbit</th>
             <th>Pengarang</th>
-            <th class="text-center" style="width: 8;">Jumlah Hlm</th>
+            <th>Jumlah Hlm</th>
             <th class="text-center">Gambar</th>
-            <th class="text-center" style="width: 12;">Aksi</th>
+            <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -18,21 +19,24 @@
             $arr = array_values($i);
         ?>
             <tr>
-                <?php for ($j = 1; $j < count($arr) - 1; $j++) : ?>
+                <?php for ($j = 0; $j < count($arr) - 1; $j++) : ?>
                     <td><?= $arr[$j]; ?></td>
                 <?php endfor ?>
-                <td><img src="<?= base_url(); ?>/<?= $arr[count($arr) - 1]; ?>" width="70" height="90"></td>
+                <td class="text-center"><img src="<?= base_url(); ?>/assets/images/buku/<?= $arr[count($arr) - 1]; ?>" width="50" height="70"></td>
                 <td class="text-center">
-                    <a href="<?= route_to('view_edit_buku', $arr[0]); ?>" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Ubah">
-                        <i class="fas fa-pencil-alt"></i>
-                    </a>
-                    <a data-id="<?= $arr[0]; ?>" class="btn btn-danger btn-action mr-1 ml-1 swal_confirm" data-toggle="tooltip" data-original-title="Hapus">
-                        <form action="<?= route_to('delete_buku', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
-                            <?= csrf_field(); ?>
-                            <input type="hidden" name="_method" value="DELETE" />
-                        </form>
-                        <i class="fas fa-trash"></i>
-                    </a>
+                    <li class="media">
+                        <div class="media-cta">
+                            <a href="<?= route_to('view_edit_buku', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Buku"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="#" data-id="<?= $arr[0]; ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Buku">
+                                <form action="<?= route_to('delete_buku', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
+                                    <?= csrf_field(); ?>
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                </form>
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="#" onclick="detailA('<?= $arr[1]; ?>');" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Buku"><i class="fas fa-info-circle"></i></a>
+                        </div>
+                    </li>
                 </td>
             </tr>
         <?php endforeach ?>
@@ -66,7 +70,7 @@
 <!-- Section JS Page After JS -->
 <?= $this->section('page_afterjs'); ?>
 <script>
-    $(document).on("click", ".swal_confirm", function(e) {
+    $(document).on("click", ".swal-confirm", function(e) {
         var id = $(this).data('id');
         swal({
                 title: 'Apakah kamu yakin?',

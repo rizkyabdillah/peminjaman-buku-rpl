@@ -28,7 +28,7 @@ $routes->group('admin', function ($routes) {
 			$routes->post('save', 'Buku::save', ['as' => 'save_buku']);
 			$routes->delete('(:any)', 'Buku::delete/$1', ['as' => 'delete_buku']);
 			$routes->get('(:any)', 'Buku::edit/$1', ['as' => 'view_edit_buku']);
-			$routes->post('/', 'Buku::update', ['as' => 'update_buku']);
+			$routes->post('(:any)', 'Buku::update/$1', ['as' => 'update_buku']);
 		}
 	);
 });

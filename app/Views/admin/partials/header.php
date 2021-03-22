@@ -1,7 +1,7 @@
 <div class="section-header">
     <?php if (empty($link_back) ?  false : true) { ?>
         <div class="section-header-back">
-            <a href="<?= route_to($link_back) ?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?= $link_back ?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
     <?php } ?>
     <h1><?= $header_title ?></h1>

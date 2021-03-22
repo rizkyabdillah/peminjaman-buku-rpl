@@ -1,8 +1,8 @@
 <!-- JS For Automatic Set Zoom to 80% -->
 <script>
-    jQuery(document).ready(function($) {
-        document.body.style.zoom = "80%";
-    });
+    // jQuery(document).ready(function($) {
+    //     document.body.style.zoom = "80%";
+    // });
 </script>
 
 <!-- General JS Scripts -->
