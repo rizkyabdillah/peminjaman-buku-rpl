@@ -66,6 +66,15 @@ class Kategori extends BaseController
 
     public function delete($id)
     {
+        
+        /* ======= Deleting data from table kategori_buku where id = $id ======= */
+        $this->model->deleteData('kategori_buku', array('id_kategori' => $id));
+
+        /* ======= Show message and redirect back to index kategori ======= */
+        // Set message where data successful deleted
+        session()->setFlashData('pesan', 'Data kategori berhasil dihapus');
+        // Redirected back to index kategori
+        return redirect()->to(route_to('view_kategori'));
     }
 
     //--------------------------------------------------------------------
