@@ -44,4 +44,14 @@ class Query
     {
         return "SELECT * FROM penerbit";
     }
+
+    public function query_kategori_show_all()
+    {
+        return "SELECT * FROM kategori_buku";
+    }
+
+    public function query_kategori_show_where($id)
+    {
+        return "SELECT * FROM kategori_buku WHERE id_kategori";
+    }
 }

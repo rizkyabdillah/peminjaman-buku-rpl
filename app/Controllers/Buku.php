@@ -270,10 +270,8 @@ class Buku extends BaseController
             $file->move(ROOTPATH . 'public/assets/images/buku', $nama_gambar);
             // Merge data with name gambar where gambar is edited
             $data = array_merge($data, array('gambar' => $nama_gambar));
-
             // Get gambar name
             $gambar = $this->request->getPost('gambar_temp');
-
             // Setting path to data images
             $path = ROOTPATH . 'public/assets/images/buku/' . $gambar;
             // Deleting images using unlink command
@@ -282,7 +280,7 @@ class Buku extends BaseController
             }
         }
 
-        // Save data to buku table
+        // Update data to buku table
         $this->model->updateData('buku', 'id_buku', $id, $data);
 
         /* ======= Show message and redirect back to index buku ======= */
