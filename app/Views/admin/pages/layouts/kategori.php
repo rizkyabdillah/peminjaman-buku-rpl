@@ -4,7 +4,7 @@
 <table class="table table-striped" id="table-descending">
     <thead>
         <tr>
-            <th class="text-center">ID</th>
+            <th>ID</th>
             <th>Kategori</th>
             <th class="text-center">Aksi</th>
         </tr>
@@ -14,7 +14,7 @@
             $arr = array_values($i);
         ?>
             <tr>
-                <?php for ($j = 0; $j < count($arr) ; $j++) : ?>
+                <?php for ($j = 0; $j < count($arr); $j++) : ?>
                     <td><?= $arr[$j]; ?></td>
                 <?php endfor ?>
                 <td class="text-center" style="width: 17%;">
