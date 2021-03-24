@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="<?= ($sidebar == 1) ? 'active' : ''; ?>"><a href="<?= route_to('dashboard'); ?>" class="nav-link"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+            <li class="<?= ($sidebar == 1) ? 'active' : ''; ?>"><a href="<?= route_to('view_dashboard'); ?>" class="nav-link"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
             <li class="<?= ($sidebar == 2) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_buku'); ?>"><i class="fas fa-book"></i> <span>Data Buku</span></a></li>
             <li class="<?= ($sidebar == 3) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_kategori'); ?>"><i class="fas fa-book-open"></i> <span>Data Kategori Buku</span></a></li>

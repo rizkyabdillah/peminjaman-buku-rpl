@@ -9,7 +9,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 }
 
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Auth');
+$routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -18,6 +18,10 @@ $routes->setAutoRoute(true);
 // $routes->get('/', 'Home::index');
 
 $routes->group('admin', function ($routes) {
+
+	$routes->get('/', 'Dashboard::index', [
+		'as' => 'view_dashboard'
+	]);
 
 	$routes->group(
 		'buku',

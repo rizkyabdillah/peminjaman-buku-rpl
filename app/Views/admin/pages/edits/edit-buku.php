@@ -1,7 +1,7 @@
 <?= $this->extend('admin/partials/index-form') ?>
 
 <?= $this->section('form-contents') ?>
-<form method="POST" action="<?= route_to('update_buku', $dataset['id_buku']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
+<form method="POST" action="<?= route_to('update_pegawai', $dataset['id_buku']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
     <!-- CSRF Field -->
     <?= csrf_field(); ?>
@@ -10,11 +10,11 @@
         <div class="form-group col-md-12">
             <label for="nama_buku">Nama Buku</label>
             <input type="hidden" name="gambar_temp" value="<?= $dataset['gambar'] ?>">
-            <input type="text" class="form-control <?= ($valid->hasError('nama_buku')) ? 'is-invalid' : ''; ?>" name="nama_buku" placeholder="Input Nama Buku" value="<?= old('nama_buku') ? old('nama_buku') : $dataset['nama_buku']; ?>"">
+            <input type="text" class="form-control <?= ($valid->hasError('nama_buku')) ? 'is-invalid' : ''; ?>" name="nama_buku" placeholder="Input Nama Buku" value="<?= old('nama_buku') ? old('nama_buku') : $dataset['nama_buku']; ?>">
             <div class=" invalid-feedback">
-            <?= $valid->getError('nama_buku'); ?>
+                <?= $valid->getError('nama_buku'); ?>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="form-row">
