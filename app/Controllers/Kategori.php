@@ -60,12 +60,48 @@ class Kategori extends BaseController
 
     public function save()
     {
-    }
+        if (!$this->validate([
+            'nama_kategori' => [
+                'label' => 'Nama Kategori',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ])) {
+            return redirect()->back()->withInput();
+        };
 
+        /* Set random 5 character for id buku */
+        $id_random = $this->utility->get_random(5);
+        /* ======= Saving data ======= */
+        // Save field column value to array
+        $data = array(
+            'id_kategori' => $id_random,
+            'nama_kategori' => ucfirst($this->request->getPost('nama_kategori')),
+        );
+        // Save data to buku table
+        $this->model->insertData('kategori_buku', $data);
+
+        /* ======= Show message and redirect back to index buku ======= */
+        // Set message where data successful inserted
+        session()->setFlashData('pesan', 'Data kategori berhasil disimpan');
+        // Redirected back to index buku
+        return redirect()->to(route_to('view_kategori'));
+    }
     //--------------------------------------------------------------------
 
     public function delete($id)
     {
+
+        /* ======= Deleting data from table kategori_buku where id = $id ======= */
+        $this->model->deleteData('kategori_buku', array('id_kategori' => $id));
+
+        /* ======= Show message and redirect back to index kategori ======= */
+        // Set message where data successful deleted
+        session()->setFlashData('pesan', 'Data kategori berhasil dihapus');
+        // Redirected back to index kategori
+        return redirect()->to(route_to('view_kategori'));
     }
 
     //--------------------------------------------------------------------
