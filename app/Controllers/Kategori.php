@@ -62,7 +62,7 @@ class Kategori extends BaseController
     {
         if (!$this->validate([
             'nama_kategori' => [
-                'label' => 'Nama Kategori',
+                'label' => 'Nama kategori',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong'
@@ -72,7 +72,7 @@ class Kategori extends BaseController
             return redirect()->back()->withInput();
         };
 
-        /* Set random 5 character for id buku */
+        /* Set random 5 character for id kategori */
         $id_random = $this->utility->get_random(5);
         /* ======= Saving data ======= */
         // Save field column value to array
@@ -80,10 +80,10 @@ class Kategori extends BaseController
             'id_kategori' => $id_random,
             'nama_kategori' => ucfirst($this->request->getPost('nama_kategori')),
         );
-        // Save data to buku table
+        // Save data to kategori table
         $this->model->insertData('kategori_buku', $data);
 
-        /* ======= Show message and redirect back to index buku ======= */
+        /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful inserted
         session()->setFlashData('pesan', 'Data kategori berhasil disimpan');
         // Redirected back to index buku

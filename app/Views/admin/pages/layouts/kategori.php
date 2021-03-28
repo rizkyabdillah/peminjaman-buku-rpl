@@ -11,10 +11,30 @@
     </thead>
     <tbody>
         <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
+            <?php foreach ($dataset as $i) :
+                $arr = array_values($i);
+            ?>
+        <tr>
+            <?php for ($j = 0; $j < count($arr); $j++) : ?>
+                <td><?= $arr[$j]; ?></td>
+            <?php endfor ?>
+            <td class="text-center" style="width: 17%;">
+                <li class="media">
+                    <div class="media-cta">
+                        <a href="<?= route_to('view_edit_kategori', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Kategori"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#" data-id="<?= $arr[0]; ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Kategori">
+                            <form action="<?= route_to('delete_kategori', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
+                                <?= csrf_field(); ?>
+                                <input type="hidden" name="_method" value="DELETE" />
+                            </form>
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </li>
+            </td>
         </tr>
+    <?php endforeach ?>
+    </tr>
     </tbody>
 </table>
 
