@@ -109,7 +109,7 @@ class Kategori extends BaseController
     public function edit($id)
     {
 
-        $query = $this->query->query_buku_show_where($id);
+        $query = $this->query->query_kategori_show_where($id);
         $dataset = $this->model->queryRowArray($query);
 
         $components = array(
@@ -131,13 +131,36 @@ class Kategori extends BaseController
 
     public function update($id)
     {
+        if (!$this->validate([
+            'nama_kategori' => [
+                'label' => 'Nama Kategori',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ])) {
+            return redirect()->back()->withInput();
+        };
+
+        /* ======= Saving data ======= */
+        // Save field column value to array
+        $data = array(
+            'nama_kategori' => strtoupper($this->request->getPost('nama_kategori')),
+        );
+
+        // Update data to kategori table
+        $this->model->updateData('kategori_buku', 'id_kategori', $id, $data);
+
+        /* ======= Show message and redirect back to index kategori ======= */
+        // Set message where data successful inserted
+        session()->setFlashData('pesan', 'Data kategori berhasil diubah');
+        // Redirected back to index kategori
+        return redirect()->to(route_to('view_kategori'));
     }
 
 
     //--------------------------------------------------------------------
-
-
-
 
 
 }
