@@ -78,7 +78,7 @@ class Kategori extends BaseController
         // Save field column value to array
         $data = array(
             'id_kategori' => $id_random,
-            'nama_kategori' => ucfirst($this->request->getPost('nama_kategori')),
+            'nama_kategori' => strtoupper($this->request->getPost('nama_kategori')),
         );
         // Save data to buku table
         $this->model->insertData('kategori_buku', $data);
