@@ -5,12 +5,9 @@ namespace App\Controllers;
 class Pegawai extends BaseController
 {
 
-    // private $data_user;
-
     public function __construct()
     {
         parent::__construct();
-        // $this->data_user = $this->model->queryArray($this->query->query_user_filter_pegawai());
     }
 
     //--------------------------------------------------------------------
@@ -131,7 +128,7 @@ class Pegawai extends BaseController
         $data = array(
             'id_user' => $id_random,
             'username' => strtolower($this->request->getPost('username')),
-            'password' => $this->request->getPost('password'),
+            'password' => $this->utility->get_bcrypt($this->request->getPost('password')),
             'level' => 'pegawai',
         );
 
@@ -250,7 +247,7 @@ class Pegawai extends BaseController
         // Save field column value to array
         $data = array(
             'username' => strtolower($this->request->getPost('username')),
-            'password' => $this->request->getPost('password'),
+            'password' => $this->utility->get_bcrypt($this->request->getPost('password')),
         );
 
         // Update data to user table

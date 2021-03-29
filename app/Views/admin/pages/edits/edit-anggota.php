@@ -1,17 +1,17 @@
 <?= $this->extend('admin/partials/index-form') ?>
 
 <?= $this->section('form-contents') ?>
-<form method="POST" action="<?= route_to('update_pegawai', $dataset['id_pegawai']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
+<form method="POST" action="<?= route_to('update_anggota', $dataset['id_anggota']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
     <!-- CSRF Field -->
     <?= csrf_field(); ?>
 
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="nama_pegawai">Nama Pegawai</label>
-            <input type="text" class="form-control <?= ($valid->hasError('nama_pegawai')) ? 'is-invalid' : ''; ?>" name="nama_pegawai" value="<?= old('nama_pegawai') ? old('nama_pegawai') : $dataset['nama_pegawai']; ?>" placeholder="Input Nama Pegawai">
+            <label for="nama_anggota">Nama Anggota</label>
+            <input type="text" class="form-control <?= ($valid->hasError('nama_anggota')) ? 'is-invalid' : ''; ?>" name="nama_anggota" value="<?= old('nama_anggota') ? old('nama_anggota') : $dataset['nama_anggota']; ?>" placeholder="Input Nama Anggota">
             <div class="invalid-feedback">
-                <?= $valid->getError('nama_pegawai'); ?>
+                <?= $valid->getError('nama_anggota'); ?>
             </div>
         </div>
     </div>
@@ -35,27 +35,10 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="username">Username</label>
-            <input type="text" class="form-control <?= ($valid->hasError('username')) ? 'is-invalid' : ''; ?>" name="username" value="<?= old('username') ? old('username') : $dataset['username']; ?>" placeholder="Input Username">
+            <label for="tanggal_gabung">Tanggal Bergabung</label>
+            <input type="text" class="form-control datepicker <?= ($valid->hasError('tanggal_gabung')) ? 'is-invalid' : ''; ?>" name="tanggal_gabung" value="<?= old('tanggal_gabung') ? old('tanggal_gabung') : $dataset['tanggal_bergabung']; ?>" placeholder="Pilih Tanggal">
             <div class="invalid-feedback">
-                <?= $valid->getError('username'); ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="password">Password</label>
-            <input type="password" class="form-control <?= ($valid->hasError('password')) ? 'is-invalid' : ''; ?>" name="password" value="<?= old('password'); ?>" placeholder="Input Password">
-            <div class="invalid-feedback">
-                <?= $valid->getError('password'); ?>
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="re_password">Ulangi Password</label>
-            <input type="password" class="form-control <?= ($valid->hasError('re_password')) ? 'is-invalid' : ''; ?>" name="re_password" placeholder="Input Password Kembali">
-            <div class="invalid-feedback">
-                <?= $valid->getError('re_password'); ?>
+                <?= $valid->getError('tanggal_gabung'); ?>
             </div>
         </div>
     </div>
@@ -82,12 +65,14 @@
 <!-- Section CSS -->
 <?= $this->section('page_css'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>/assets/modules/jquery-selectric/selectric.css">
+<link rel="stylesheet" href="<?= base_url() ?>/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
 <?= $this->endSection(); ?>
 
 
 <!-- Section JS Page Modules -->
 <?= $this->section('page_modules'); ?>
 <script src="<?= base_url() ?>/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<script src="<?= base_url() ?>/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
 <?= $this->endSection(); ?>
 
 

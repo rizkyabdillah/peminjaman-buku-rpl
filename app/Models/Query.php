@@ -74,4 +74,14 @@ class Query
     {
         return "SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.nomor_telpon, pegawai.jenis_kelamin, user.username FROM pegawai, user WHERE pegawai.id_pegawai = user.id_user";
     }
+
+    public function query_anggota_show_all()
+    {
+        return "SELECT * FROM anggota";
+    }
+
+    public function query_anggota_show_where($id)
+    {
+        return "SELECT * FROM anggota WHERE id_anggota ='$id'";
+    }
 }

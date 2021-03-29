@@ -1,7 +1,7 @@
 <?= $this->extend('admin/partials/index-form') ?>
 
 <?= $this->section('form-contents') ?>
-<form method="POST" action="<?= route_to('update_pegawai', $dataset['id_buku']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
+<form method="POST" action="<?= route_to('update_buku', $dataset['id_buku']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
     <!-- CSRF Field -->
     <?= csrf_field(); ?>
