@@ -52,6 +52,6 @@ class Query
 
     public function query_kategori_show_where($id)
     {
-        return "SELECT * FROM kategori_buku WHERE id_kategori";
+        return "SELECT * FROM kategori_buku WHERE id_kategori = '$id'";
     }
 }
