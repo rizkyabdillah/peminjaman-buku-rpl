@@ -162,7 +162,9 @@ class Buku extends BaseController
         $path = ROOTPATH . 'public/assets/images/buku/' . $name_image[0]['gambar'];
         // Deleting images using unlink command
         if (!hash_equals($name_image[0]['gambar'], 'default.png')) {
-            unlink($path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
         /* ======= Deleting data from table buku where id = $id ======= */
         $this->model->deleteData('buku', array('id_buku' => $id));
@@ -276,7 +278,9 @@ class Buku extends BaseController
             $path = ROOTPATH . 'public/assets/images/buku/' . $gambar;
             // Deleting images using unlink command
             if (!hash_equals($gambar, 'default.png')) {
-                unlink($path);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
             }
         }
 
