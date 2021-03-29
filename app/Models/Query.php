@@ -52,6 +52,46 @@ class Query
 
     public function query_kategori_show_where($id)
     {
-        return "SELECT * FROM kategori_buku WHERE id_kategori = '$id'";
+        return "SELECT * FROM kategori_buku WHERE id_kategori ='$id'";
+    }
+
+    public function query_user_show_all()
+    {
+        return "SELECT * FROM user";
+    }
+
+    public function query_user_filter_pegawai()
+    {
+        return "SELECT * FROM user WHERE level ='PEGAWAI'";
+    }
+
+    public function query_user_filter_pegawai_where($id)
+    {
+        return "SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.jenis_kelamin, pegawai.nomor_telpon, user.username, pegawai.alamat FROM pegawai, user WHERE pegawai.id_pegawai = user.id_user AND pegawai.id_pegawai = '$id'";
+    }
+
+    public function query_user_filter_pegawai_all()
+    {
+        return "SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.nomor_telpon, pegawai.jenis_kelamin, user.username FROM pegawai, user WHERE pegawai.id_pegawai = user.id_user";
+    }
+
+    public function query_anggota_show_all()
+    {
+        return "SELECT * FROM anggota";
+    }
+
+    public function query_anggota_show_where($id)
+    {
+        return "SELECT * FROM anggota WHERE id_anggota ='$id'";
+    }
+
+    public function query_rak_buku_show_all()
+    {
+        return "SELECT * FROM rak_buku";
+    }
+
+    public function query_rak_buku_show_where($id)
+    {
+        return "SELECT * FROM rak_buku WHERE id_rak ='$id'";
     }
 }
