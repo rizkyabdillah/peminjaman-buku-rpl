@@ -84,4 +84,9 @@ class Query
     {
         return "SELECT * FROM anggota WHERE id_anggota ='$id'";
     }
+
+    public function query_pengarang_show_where($id)
+    {
+        return "SELECT * FROM pengarang WHERE id_pengarang ='$id'";
+    }
 }
