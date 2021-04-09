@@ -32,7 +32,7 @@ class Rak extends BaseController
         $components = array(
             'is_show_badge4' => false,
             'link_add' => route_to('view_add_rak'),
-            'desc_badges' => 'Berikut adalah daftar semua data kategori yang terdaftar',
+            'desc_badges' => 'Berikut adalah daftar semua data rak yang terdaftar',
             'dataset' => $dataset,
         );
 
