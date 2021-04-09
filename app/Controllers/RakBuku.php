@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Rak extends BaseController
+class RakBuku extends BaseController
 {
 
     public function __construct()
@@ -30,7 +30,7 @@ class Rak extends BaseController
         $query = $this->query->query_rak_show_all();
         $dataset = $this->model->queryArray($query);
         $components = array(
-            'is_show_badge4' => false,
+            'is_show_badge3' => false,
             'link_add' => route_to('view_add_rak'),
             'desc_badges' => 'Berikut adalah daftar semua data rak yang terdaftar',
             'dataset' => $dataset,
