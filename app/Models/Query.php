@@ -89,4 +89,14 @@ class Query
     {
         return "SELECT * FROM pengarang WHERE id_pengarang ='$id'";
     }
+
+    public function query_rakbuku_show_all()
+    {
+        return "SELECT * FROM rak_buku";
+    }
+
+    public function query_rakbuku_show_where($id)
+    {
+        return "SELECT * FROM rak_buku where id_rak ='$id'";
+    }
 }

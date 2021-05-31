@@ -50,15 +50,15 @@ $routes->group('admin', function ($routes) {
 	);
 
 	$routes->group(
-		'rak',
+		'rakbuku',
 		/**['filter' => 'login_admin'],**/
 		function ($routes) {
-			$routes->get('/', 'RakBuku::index', ['as' => 'view_rak']);
-			$routes->get('add', 'RakBuku::add', ['as' => 'view_add_rak']);
-			$routes->post('save', 'RakBuku::save', ['as' => 'save_kategori']);
-			$routes->delete('(:any)', 'RakBuku::delete/$1', ['as' => 'delete_rak']);
-			$routes->get('(:any)', 'RakBuku::edit/$1', ['as' => 'view_edit_rak']);
-			$routes->post('(:any)', 'RakBuku::update/$1', ['as' => 'update_rak']);
+			$routes->get('/', 'Rakbuku::index', ['as' => 'view_rakbuku']);
+			$routes->get('add', 'Rakbuku::add', ['as' => 'view_add_rakbuku']);
+			$routes->post('save', 'Rakbuku::save', ['as' => 'save_rakbuku']);
+			$routes->delete('(:any)', 'Rakbuku::delete/$1', ['as' => 'delete_rakbuku']);
+			$routes->get('(:any)', 'Rakbuku::edit/$1', ['as' => 'view_edit_rakbuku']);
+			$routes->post('(:any)', 'Rakbuku::update/$1', ['as' => 'update_rakbuku']);
 		}
 	);
 

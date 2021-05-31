@@ -12,7 +12,7 @@
             <li class="menu-header">Master Data</li>
             <li class="<?= ($sidebar == 2) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_buku'); ?>"><i class="fas fa-book"></i> <span>Data Buku</span></a></li>
             <li class="<?= ($sidebar == 3) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_kategori'); ?>"><i class="fas fa-book-open"></i> <span>Data Kategori Buku</span></a></li>
-            <li class="<?= ($sidebar == 4) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_rak'); ?>"><i class="fas fa-bookmark"></i> <span>Data Rak Buku</span></a></li>
+            <li class="<?= ($sidebar == 4) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_rakbuku'); ?>"><i class="fas fa-bookmark"></i> <span>Data Rak Buku</span></a></li>
             <li class="<?= ($sidebar == 5) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_penerbit'); ?>"><i class="fas fa-book-reader"></i> <span>Data Penerbit</span></a></li>
             <li class="<?= ($sidebar == 6) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pengarang'); ?>"><i class="fas fa-atlas"></i> <span>Data Pengarang</span></a></li>
             <li class="<?= ($sidebar == 7) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_anggota'); ?>"><i class="fas fa-user-friends"></i> <span>Data Anggota</span></a></li>
