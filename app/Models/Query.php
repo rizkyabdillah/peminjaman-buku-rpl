@@ -35,16 +35,6 @@ class Query
         return "SELECT * FROM rak_buku ORDER BY nomor_rak ASC";
     }
 
-    public function query_pengarang_show_all()
-    {
-        return "SELECT * FROM pengarang";
-    }
-
-    public function query_penerbit_show_all()
-    {
-        return "SELECT * FROM penerbit";
-    }
-
     public function query_kategori_show_all()
     {
         return "SELECT * FROM kategori_buku";
@@ -85,11 +75,6 @@ class Query
         return "SELECT * FROM anggota WHERE id_anggota ='$id'";
     }
 
-    public function query_pengarang_show_where($id)
-    {
-        return "SELECT * FROM pengarang WHERE id_pengarang ='$id'";
-    }
-
     public function query_rakbuku_show_all()
     {
         return "SELECT * FROM rak_buku";
@@ -98,5 +83,25 @@ class Query
     public function query_rakbuku_show_where($id)
     {
         return "SELECT * FROM rak_buku where id_rak ='$id'";
+    }
+
+    public function query_penerbit_show_all()
+    {
+        return "SELECT * FROM penerbit";
+    }
+
+    public function query_penerbit_show_where($id)
+    {
+        return "SELECT * FROM penerbit WHERE id_penerbit = '$id'";
+    }
+
+    public function query_pengarang_show_all()
+    {
+        return "SELECT * FROM pengarang";
+    }
+
+    public function query_pengarang_show_where($id)
+    {
+        return "SELECT * FROM pengarang WHERE id_pengarang ='$id'";
     }
 }
