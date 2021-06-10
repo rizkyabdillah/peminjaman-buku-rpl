@@ -6,7 +6,7 @@
         <tr>
             <th>ID</th>
             <th>Kategori</th>
-            <th class="text-center">Aksi</th>
+            <th class="text-center" style="width: 15%;">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
                 <?php for ($j = 0; $j < count($arr); $j++) : ?>
                     <td><?= $arr[$j]; ?></td>
                 <?php endfor ?>
-                <td class="text-center" style="width: 17%;">
+                <td class="text-center" style="align-content:center ;">
                     <li class="media">
                         <div class="media-cta">
                             <a href="<?= route_to('view_edit_kategori', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Kategori"><i class="fas fa-pencil-alt"></i></a>

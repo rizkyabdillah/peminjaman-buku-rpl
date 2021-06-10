@@ -8,7 +8,7 @@
             <th>Nama Penerbit</th>
             <th>Telpon Penerbit</th>
             <th>Alamat</th>
-            <th class="text-center" style="width: 20%;">Aksi</th>
+            <th class="text-center" style="width: 15%;">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
                 <?php
                 endfor
                 ?>
-                <td class="text-center" style="width: 20%;">
+                <td class="text-center" style="align-content:center ;">
                     <li class="media">
                         <div class="media-cta">
                             <a href="<?= route_to('view_edit_penerbit', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Penerbit"><i class="fas fa-pencil-alt"></i></a>

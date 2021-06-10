@@ -6,7 +6,7 @@
         <tr>
             <th class="text-center" style="width: 15%;">ID</th>
             <th>Nomor Rak</th>
-            <th class="text-center" style="width: 20%;">Aksi</th>
+            <th class="text-center" style="width: 15%;">Aksi</th>
         </tr>
     </thead>
     <tbody>

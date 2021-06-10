@@ -17,6 +17,17 @@ $routes->setAutoRoute(true);
 
 // $routes->get('/', 'Home::index');
 
+$routes->group('/', function ($routes) {
+
+	$routes->get('login', 'Auth::index', [
+		'as' => 'view_login'
+	]);
+
+	$routes->post('auth', 'Auth::auth', [
+		'as' => 'auth_login'
+	]);
+});
+
 $routes->group('admin', function ($routes) {
 
 	$routes->get('/', 'Dashboard::index', [
