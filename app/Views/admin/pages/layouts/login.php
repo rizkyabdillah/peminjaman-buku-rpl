@@ -27,10 +27,10 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="<?= route_to('auth_login'); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
+                                <form method="POST" action="<?= route_to('auth_login'); ?>" class="needs-validation">
                                     <div class="form-group">
                                         <label for="username">Username</label>
-                                        <input id="username" type="text" class="form-control <?= ($valid->hasError('username')) ? 'is-invalid' : ''; ?>" value="<?= old('username'); ?>" name="username" tabindex="1" required autofocus>
+                                        <input id="username" type="text" class="form-control <?= ($valid->hasError('username')) ? 'is-invalid' : ''; ?>" value="<?= old('username'); ?>" name="username" tabindex="1">
                                         <div class="invalid-feedback">
                                             <?= $valid->getError('username'); ?>
                                         </div>
@@ -40,7 +40,7 @@
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
                                         </div>
-                                        <input id="password" type="password" class="form-control <?= ($valid->hasError('password')) ? 'is-invalid' : ''; ?>" value="<?= old('password'); ?>" name="password" tabindex="2" required>
+                                        <input id="password" type="password" class="form-control <?= ($valid->hasError('password')) ? 'is-invalid' : ''; ?>" name="password" tabindex="2">
                                         <div class="invalid-feedback">
                                             <?= $valid->getError('password'); ?>
                                         </div>
@@ -63,7 +63,14 @@
     </div>
 
     <?= $this->include('admin/partials/part-js') ?>
-
+    <script>
+        <?php if (session()->getFlashData('pesan')) : ?>
+            swal('Gagal', '<?= session()->getFlashData('pesan'); ?>', 'warning', {
+                buttons: false,
+                timer: 1200,
+            });
+        <?php endif ?>
+    </script>
 </body>
 
 </html>

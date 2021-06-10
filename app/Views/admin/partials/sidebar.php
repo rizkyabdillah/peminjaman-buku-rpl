@@ -16,7 +16,9 @@
             <li class="<?= ($sidebar == 5) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_penerbit'); ?>"><i class="fas fa-book-reader"></i> <span>Data Penerbit</span></a></li>
             <li class="<?= ($sidebar == 6) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pengarang'); ?>"><i class="fas fa-atlas"></i> <span>Data Pengarang</span></a></li>
             <li class="<?= ($sidebar == 7) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_anggota'); ?>"><i class="fas fa-user-friends"></i> <span>Data Anggota</span></a></li>
-            <li class="<?= ($sidebar == 8) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pegawai'); ?>"><i class="fas fa-user-cog"></i> <span>Data Pegawai</span></a></li>
+            <?php if (session()->get('level') === 'admin') : ?>
+                <li class="<?= ($sidebar == 8) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pegawai'); ?>"><i class="fas fa-user-cog"></i> <span>Data Pegawai</span></a></li>
+            <?php endif ?>
             <li class="menu-header">Transaksi</li>
             <li class="<?= ($sidebar == 9) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_peminjaman'); ?>"><i class="fas fa-hand-holding"></i> <span>Peminjaman</span></a></li>
             <li class="<?= ($sidebar == 10) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pengembalian'); ?>"><i class="fas fa-exchange-alt"></i> <span>Pengembalian</span></a></li>
