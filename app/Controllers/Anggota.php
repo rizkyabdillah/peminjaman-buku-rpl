@@ -129,9 +129,6 @@ class Anggota extends BaseController
 
     public function edit($id)
     {
-
-        // $query = $this->query->query_anggota_show_where($id);
-        // $dataset = $this->model->queryRowArray($query);
         $dataset = $this->model->getDataWhereArray('ANGGOTA', ['id_anggota' => $id]);
 
         $components = array(
