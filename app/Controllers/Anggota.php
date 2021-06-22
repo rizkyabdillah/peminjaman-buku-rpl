@@ -27,9 +27,7 @@ class Anggota extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_anggota_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getAllDataArray('ANGGOTA');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_anggota'),
@@ -132,8 +130,9 @@ class Anggota extends BaseController
     public function edit($id)
     {
 
-        $query = $this->query->query_anggota_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        // $query = $this->query->query_anggota_show_where($id);
+        // $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('ANGGOTA', ['id_anggota' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -142,7 +141,7 @@ class Anggota extends BaseController
             'desc_badges' => 'Ubah data anggota pada form dibawah ini',
             'text_header_form' => 'Ubah anggota',
             'valid' => $this->validation,
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-anggota', array_merge($this->array_default(), $components));

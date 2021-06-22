@@ -43,7 +43,7 @@ class Auth extends BaseController
             // dd($this->validation);
             return redirect()->back()->withInput();
         } else {
-            $cek_user = $this->model->getRowDataArray('user', ['username' => $this->request->getVar('username')]);
+            $cek_user = $this->model->getRowDataArray('USER', ['username' => $this->request->getVar('username')]);
             if ($cek_user) {
                 if (password_verify($this->request->getVar('password'), $cek_user['password'])) {
                     session()->set([
