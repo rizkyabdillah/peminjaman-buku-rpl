@@ -11,7 +11,7 @@ class LoginFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // Do something here
-        if (!empty(session()->get('is_login'))) {
+        if (session('is_login')) {
             return redirect()->to(route_to('view_dashboard'));
         }
     }

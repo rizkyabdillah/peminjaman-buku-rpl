@@ -21,7 +21,19 @@ $routes->get('bcrypt/(:any)', 'Auth::getBcrypt/$1', [
 	'as' => 'get_bcrypt'
 ]);
 
+$routes->get('/dashboard', '', ['filter' => 'is_not_login']);
+$routes->get('/auth', '', ['filter' => 'is_not_login']);
+$routes->get('/anggota', '', ['filter' => 'is_not_login']);
+$routes->get('/buku', '', ['filter' => 'is_not_login']);
+$routes->get('/kategori', '', ['filter' => 'is_not_login']);
+$routes->get('/pegawai', '', ['filter' => 'is_not_login']);
+$routes->get('/penerbit', '', ['filter' => 'is_not_login']);
+$routes->get('/pengarang', '', ['filter' => 'is_not_login']);
+$routes->get('/rakbuku', '', ['filter' => 'is_not_login']);
+
 $routes->group('/', ['filter' => 'is_login'], function ($routes) {
+
+	$routes->get('', 'Auth::index');
 
 	$routes->get('login', 'Auth::index', [
 		'as' => 'view_login'
@@ -31,6 +43,7 @@ $routes->group('/', ['filter' => 'is_login'], function ($routes) {
 		'as' => 'auth_login'
 	]);
 });
+
 
 $routes->group('admin', ['filter' => 'is_not_login'], function ($routes) {
 
