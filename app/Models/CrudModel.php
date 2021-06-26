@@ -109,9 +109,7 @@ class CrudModel extends Model
     {
         return $this->getBuilder($table)->select($column)->where($filter)->get()->getResultArray();
     }
-
-
-
+    
     // Ambil semua data dengan pengurutan
     public function getDataOrderByObj($table, $order_by)
     {

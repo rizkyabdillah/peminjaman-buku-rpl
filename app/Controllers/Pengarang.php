@@ -85,7 +85,7 @@ class Pengarang extends BaseController
         );
 
         // Save data to pengarang table
-        $this->model->insertData('pengarang', $data);
+        $this->model->insertData('PENGARANG', $data);
 
         /* ======= Show message and redirect back to index pengarang ======= */
         // Set message where data successful inserted
@@ -99,7 +99,7 @@ class Pengarang extends BaseController
     public function delete($id)
     {
         /* ======= Deleting data from table pengarang where id = $id ======= */
-        $this->model->deleteData('pengarang', array('id_pengarang' => $id));
+        $this->model->deleteData('PENGARANG', array('id_pengarang' => $id));
 
         /* ======= Show message and redirect back to index pengarang ======= */
         // Set message where data successful deleted
@@ -155,7 +155,7 @@ class Pengarang extends BaseController
         );
 
         // Update data to pengarang table
-        $this->model->updateData('pengarang', 'id_pengarang', $id, $data);
+        $this->model->updateData('PENGARANG', 'id_pengarang', $id, $data);
 
         /* ======= Show message and redirect back to index pengarang ======= */
         // Set message where data successful inserted

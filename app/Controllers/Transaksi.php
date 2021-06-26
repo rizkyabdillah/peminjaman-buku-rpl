@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Rakbuku extends BaseController
+class Transaksi extends BaseController
 {
 
     public function __construct()
@@ -15,10 +15,10 @@ class Rakbuku extends BaseController
     private function array_default()
     {
         return array(
-            'header_title' => 'Data Rak Buku',
-            'badges' => 'Pages Data Rak Buku',
-            'sidebar' => 4,
-            'link_breadcrumb' => route_to('view_rakbuku')
+            'header_title' => 'Data Transaksi',
+            'badges' => 'Pages Data Transaksi',
+            'sidebar' => 9,
+            'link_breadcrumb' => route_to('view_transaksi')
         );
     }
 
@@ -27,16 +27,16 @@ class Rakbuku extends BaseController
     public function index()
     {
 
-        $query = $this->query->query_rakbuku_show_all();
-        $dataset = $this->model->queryArray($query);
+        // $query = $this->query->query_rakbuku_show_all();
+        // $dataset = $this->model->queryArray($query);
         $components = array(
             'is_show_badge3' => false,
-            'link_add' => route_to('view_add_rakbuku'),
-            'desc_badges' => 'Berikut adalah daftar semua data rak buku yang terdaftar',
-            'dataset' => $dataset
+            'link_add' => route_to('view_add_transaksi'),
+            'desc_badges' => 'Berikut adalah daftar semua data transaksi yang terdaftar',
+            // 'dataset' => $dataset
         );
 
-        return view('admin/pages/layouts/rakbuku', array_merge($this->array_default(), $components));
+        return view('admin/pages/layouts/transaksi', array_merge($this->array_default(), $components));
     }
 
     //--------------------------------------------------------------------
@@ -44,16 +44,29 @@ class Rakbuku extends BaseController
     public function add()
     {
 
+        $data_anggota = $this->model->getAllDataArray("ANGGOTA");
+        $query = $this->query->query_buku_short();
+        $data_buku = $this->model->queryArray($query);
+
+        $id_transaksi = $this->utility->get_random(12);
+
+        $dataset = [
+            'data_anggota' => $data_anggota,
+            'data_buku' => $data_buku,
+        ];
+
         $components = array(
             'is_show_badge3' => true,
-            'badge_3' => 'Tambah Rak Buku',
-            'link_back' => route_to('view_rakbuku'),
-            'desc_badges' => 'Tambahkan data rak buku pada form dibawah ini',
-            'text_header_form' => 'Tambah Rak Buku',
-            'valid' => $this->validation,
+            'badge_3' => 'Tambah Transaksi Peminjaman',
+            'link_back' => route_to('view_transaksi'),
+            'desc_badges' => 'Tambahkan data peminjaman buku pada form dibawah ini',
+            'text_header_form' => 'Tambah Peminjaman Buku',
+            'dataset' => $dataset,
+            'id_transaksi' => $id_transaksi,
+            'valid' => $this->validation
         );
 
-        return view('admin/pages/adds/add-rakbuku', array_merge($this->array_default(), $components));
+        return view('admin/pages/adds/add-transaksi', array_merge($this->array_default(), $components));
     }
 
     //--------------------------------------------------------------------
@@ -86,7 +99,7 @@ class Rakbuku extends BaseController
         );
 
         // Save data to rak_buku table
-        $this->model->insertData('RAK_BUKU', $data);
+        $this->model->insertData('rak_buku', $data);
 
         /* ======= Show message and redirect back to index rakbuku ======= */
         // Set message where data successful inserted
@@ -100,7 +113,7 @@ class Rakbuku extends BaseController
     public function delete($id)
     {
         /* ======= Deleting data from table rak_buku where id = $id ======= */
-        $this->model->deleteData('RAK_BUKU', array('id_rak' => $id));
+        $this->model->deleteData('rak_buku', array('id_rak' => $id));
 
         /* ======= Show message and redirect back to index rakbuku ======= */
         // Set message where data successful deleted
@@ -157,7 +170,7 @@ class Rakbuku extends BaseController
         );
 
         // Update data to rak_buku table
-        $this->model->updateData('RAK_BUKU', 'id_rak', $id, $data);
+        $this->model->updateData('rak_buku', 'id_rak', $id, $data);
 
         /* ======= Show message and redirect back to index rak_buku ======= */
         // Set message where data successful inserted

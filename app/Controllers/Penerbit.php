@@ -101,7 +101,7 @@ class Penerbit extends BaseController
         );
 
         // Save data to penerbit table
-        $this->model->insertData('penerbit', $data);
+        $this->model->insertData('PENERBIT', $data);
 
         /* ======= Show message and redirect back to index penerbit ======= */
         // Set message where data successful inserted
@@ -115,7 +115,7 @@ class Penerbit extends BaseController
     public function delete($id)
     {
         /* ======= Deleting data from table penerbit where id = $id ======= */
-        $this->model->deleteData('penerbit', array('id_penerbit' => $id));
+        $this->model->deleteData('PENERBIT', array('id_penerbit' => $id));
 
         /* ======= Show message and redirect back to index penerbit ======= */
         // Set message where data successful deleted
@@ -187,7 +187,7 @@ class Penerbit extends BaseController
         );
 
         // Update data to penerbit table
-        $this->model->updateData('penerbit', 'id_penerbit', $id, $data);
+        $this->model->updateData('PENERBIT', 'id_penerbit', $id, $data);
 
         /* ======= Show message and redirect back to index penerbit ======= */
         // Set message where data successful inserted

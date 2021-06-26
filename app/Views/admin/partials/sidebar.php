@@ -20,9 +20,8 @@
                 <li class="<?= ($sidebar == 8) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pegawai'); ?>"><i class="fas fa-user-cog"></i> <span>Data Pegawai</span></a></li>
             <?php endif ?>
             <li class="menu-header">Transaksi</li>
-            <li class="<?= ($sidebar == 9) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_peminjaman'); ?>"><i class="fas fa-hand-holding"></i> <span>Peminjaman</span></a></li>
-            <li class="<?= ($sidebar == 10) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_pengembalian'); ?>"><i class="fas fa-exchange-alt"></i> <span>Pengembalian</span></a></li>
-            <li class="<?= ($sidebar == 11) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_denda'); ?>"><i class="fas fa-hand-holding-usd"></i> <span>Denda</span></a></li>
+            <li class="<?= ($sidebar == 9) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_transaksi'); ?>"><i class="fas fa-exchange-alt"></i> <span>Transaksi</span></a></li>
+            <li class="<?= ($sidebar == 10) ? 'active' : ''; ?>"><a class="nav-link" href="<?= route_to('view_denda'); ?>"><i class="fas fa-hand-holding-usd"></i> <span>Denda</span></a></li>
         </ul>
     </aside>
 </div>

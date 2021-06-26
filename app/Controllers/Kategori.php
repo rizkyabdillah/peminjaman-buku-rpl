@@ -81,7 +81,7 @@ class Kategori extends BaseController
             'nama_kategori' => strtoupper($this->request->getPost('nama_kategori')),
         );
         // Save data to kategori table
-        $this->model->insertData('kategori_buku', $data);
+        $this->model->insertData('KATEGORI_BUKU', $data);
 
         /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful inserted
@@ -95,7 +95,7 @@ class Kategori extends BaseController
     {
 
         /* ======= Deleting data from table kategori_buku where id = $id ======= */
-        $this->model->deleteData('kategori_buku', array('id_kategori' => $id));
+        $this->model->deleteData('KATEGORI_BUKU', array('id_kategori' => $id));
 
         /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful deleted
@@ -150,7 +150,7 @@ class Kategori extends BaseController
         );
 
         // Update data to kategori table
-        $this->model->updateData('kategori_buku', 'id_kategori', $id, $data);
+        $this->model->updateData('KATEGORI_BUKU', 'id_kategori', $id, $data);
 
         /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful inserted

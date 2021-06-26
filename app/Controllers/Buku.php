@@ -142,7 +142,7 @@ class Buku extends BaseController
             'gambar' => $nama_gambar,
         );
         // Save data to buku table
-        $this->model->insertData('buku', $data);
+        $this->model->insertData('BUKU', $data);
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful inserted
@@ -157,7 +157,7 @@ class Buku extends BaseController
     {
         /* ======= Deleting image from public/assets/images/buku/ ======= */
         // Get name image from data deleted
-        $name_image = $this->model->getDataColumnWhereArray('buku', 'gambar', array('id_buku' => $id));
+        $name_image = $this->model->getDataColumnWhereArray('BUKU', 'gambar', array('id_buku' => $id));
         // Setting path to data images
         $path = ROOTPATH . 'public/assets/images/buku/' . $name_image[0]['gambar'];
         // Deleting images using unlink command
@@ -167,7 +167,7 @@ class Buku extends BaseController
             }
         }
         /* ======= Deleting data from table buku where id = $id ======= */
-        $this->model->deleteData('buku', array('id_buku' => $id));
+        $this->model->deleteData('BUKU', array('id_buku' => $id));
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful deleted
@@ -285,7 +285,7 @@ class Buku extends BaseController
         }
 
         // Update data to buku table
-        $this->model->updateData('buku', 'id_buku', $id, $data);
+        $this->model->updateData('BUKU', 'id_buku', $id, $data);
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful inserted

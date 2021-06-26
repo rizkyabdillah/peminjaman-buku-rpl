@@ -7,62 +7,62 @@ class Query
 
     public function query_buku_show()
     {
-        return "SELECT buku.id_buku, buku.nama_buku, kategori_buku.nama_kategori, penerbit.nama_penerbit, pengarang.nama_pengarang, rak_buku.nomor_rak, buku.jumlah_halaman, buku.tahun_cetakan, buku.gambar FROM buku, kategori_buku, penerbit, pengarang, rak_buku WHERE buku.id_kategori = kategori_buku.id_kategori AND buku.id_penerbit = penerbit.id_penerbit AND buku.id_pengarang = pengarang.id_pengarang AND buku.id_rak = rak_buku.id_rak";
+        return "SELECT BUKU.id_buku, BUKU.nama_buku, KATEGORI_BUKU.nama_kategori, PENERBIT.nama_penerbit, PENGARANG.nama_pengarang, RAK_BUKU.nomor_rak, BUKU.jumlah_halaman, BUKU.tahun_cetakan, BUKU.gambar FROM BUKU, KATEGORI_BUKU, PENERBIT, PENGARANG, RAK_BUKU WHERE BUKU.id_kategori = KATEGORI_BUKU.id_kategori AND BUKU.id_penerbit = PENERBIT.id_penerbit AND BUKU.id_pengarang = PENGARANG.id_pengarang AND BUKU.id_rak = RAK_BUKU.id_rak";
     }
 
     public function query_buku_short()
     {
-        return "SELECT buku.id_buku, buku.nama_buku, kategori_buku.nama_kategori, penerbit.nama_penerbit, pengarang.nama_pengarang, buku.jumlah_halaman, buku.gambar FROM buku, kategori_buku, penerbit, pengarang WHERE buku.id_kategori = kategori_buku.id_kategori AND buku.id_penerbit = penerbit.id_penerbit AND buku.id_pengarang = pengarang.id_pengarang";
+        return "SELECT BUKU.id_buku, BUKU.nama_buku, KATEGORI_BUKU.nama_kategori, PENERBIT.nama_penerbit, PENGARANG.nama_pengarang, BUKU.jumlah_halaman, BUKU.gambar FROM BUKU, KATEGORI_BUKU, PENERBIT, PENGARANG WHERE BUKU.id_kategori = KATEGORI_BUKU.id_kategori AND BUKU.id_penerbit = PENERBIT.id_penerbit AND BUKU.id_pengarang = PENGARANG.id_pengarang";
     }
 
     public function query_buku_show_all()
     {
-        return "SELECT * FROM buku";
+        return "SELECT * FROM BUKU";
     }
 
     public function query_buku_show_where($id)
     {
-        return "SELECT * FROM buku WHERE id_buku ='$id'";
+        return "SELECT * FROM BUKU WHERE id_buku ='$id'";
     }
 
     public function query_katogori_show_all()
     {
-        return "SELECT * FROM kategori_buku";
+        return "SELECT * FROM KATEGORI_BUKU";
     }
 
     public function query_rak_show_all()
     {
-        return "SELECT * FROM rak_buku ORDER BY nomor_rak ASC";
+        return "SELECT * FROM RAK_BUKU ORDER BY nomor_rak ASC";
     }
 
     public function query_kategori_show_all()
     {
-        return "SELECT * FROM kategori_buku";
+        return "SELECT * FROM KATEGORI_BUKU";
     }
 
     public function query_kategori_show_where($id)
     {
-        return "SELECT * FROM kategori_buku WHERE id_kategori ='$id'";
+        return "SELECT * FROM KATEGORI_BUKU WHERE id_kategori ='$id'";
     }
 
     public function query_user_show_all()
     {
-        return "SELECT * FROM user";
+        return "SELECT * FROM USER";
     }
 
     public function query_user_filter_pegawai()
     {
-        return "SELECT * FROM user WHERE level ='PEGAWAI'";
+        return "SELECT * FROM USER WHERE level ='PEGAWAI'";
     }
 
     public function query_user_filter_pegawai_where($id)
     {
-        return "SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.jenis_kelamin, pegawai.nomor_telpon, user.username, pegawai.alamat FROM pegawai, user WHERE pegawai.id_pegawai = user.id_user AND pegawai.id_pegawai = '$id'";
+        return "SELECT PEGAWAI.id_pegawai, PEGAWAI.nama_pegawai, PEGAWAI.jenis_kelamin, PEGAWAI.nomor_telpon, USER.username, PEGAWAI.alamat FROM PEGAWAI, USER WHERE PEGAWAI.id_pegawai = USER.id_user AND PEGAWAI.id_pegawai = '$id'";
     }
 
     public function query_user_filter_pegawai_all()
     {
-        return "SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.nomor_telpon, pegawai.jenis_kelamin, user.username FROM pegawai, user WHERE pegawai.id_pegawai = user.id_user";
+        return "SELECT PEGAWAI.id_pegawai, PEGAWAI.nama_pegawai, PEGAWAI.nomor_telpon, PEGAWAI.jenis_kelamin, USER.username FROM PEGAWAI, USER WHERE PEGAWAI.id_pegawai = USER.id_user";
     }
 
     // public function query_anggota_show_all()
@@ -77,31 +77,31 @@ class Query
 
     public function query_rakbuku_show_all()
     {
-        return "SELECT * FROM rak_buku";
+        return "SELECT * FROM RAK_BUKU";
     }
 
     public function query_rakbuku_show_where($id)
     {
-        return "SELECT * FROM rak_buku where id_rak ='$id'";
+        return "SELECT * FROM RAK_BUKU where id_rak ='$id'";
     }
 
     public function query_penerbit_show_all()
     {
-        return "SELECT * FROM penerbit";
+        return "SELECT * FROM PENERBIT";
     }
 
     public function query_penerbit_show_where($id)
     {
-        return "SELECT * FROM penerbit WHERE id_penerbit = '$id'";
+        return "SELECT * FROM PENERBIT WHERE id_penerbit = '$id'";
     }
 
     public function query_pengarang_show_all()
     {
-        return "SELECT * FROM pengarang";
+        return "SELECT * FROM PENGARANG";
     }
 
     public function query_pengarang_show_where($id)
     {
-        return "SELECT * FROM pengarang WHERE id_pengarang ='$id'";
+        return "SELECT * FROM PENGARANG WHERE id_pengarang ='$id'";
     }
 }

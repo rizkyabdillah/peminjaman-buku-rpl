@@ -78,7 +78,7 @@ class Pegawai extends BaseController
                 ]
             ], 'username' => [
                 'label' => 'Username',
-                'rules' => 'required|is_unique[user.username]',
+                'rules' => 'required|is_unique[USER.username]',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
                     'is_unique' => '{field} sudah tersedia',
@@ -202,7 +202,7 @@ class Pegawai extends BaseController
                 ]
             ], 'username' => [
                 'label' => 'Username',
-                'rules' => 'required|is_unique[user.username,id_user,' . $id . ']',
+                'rules' => 'required|is_unique[USER.username,id_user,' . $id . ']',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
                     'is_unique' => '{field} sudah tersedia',

@@ -102,7 +102,7 @@ class Anggota extends BaseController
         );
 
         // Save data to anggota table
-        $this->model->insertData('anggota', $data);
+        $this->model->insertData('ANGGOTA', $data);
 
         /* ======= Show message and redirect back to index anggota ======= */
         // Set message where data successful inserted
@@ -116,7 +116,7 @@ class Anggota extends BaseController
     public function delete($id)
     {
         /* ======= Deleting data from table anggota where id = $id ======= */
-        $this->model->deleteData('anggota', array('id_anggota' => $id));
+        $this->model->deleteData('ANGGOTA', array('id_anggota' => $id));
 
         /* ======= Show message and redirect back to index anggota ======= */
         // Set message where data successful deleted
@@ -188,7 +188,7 @@ class Anggota extends BaseController
         );
 
         // Update data to anggota table
-        $this->model->updateData('anggota', 'id_anggota', $id, $data);
+        $this->model->updateData('ANGGOTA', 'id_anggota', $id, $data);
 
         /* ======= Show message and redirect back to index anggota ======= */
         // Set message where data successful inserted

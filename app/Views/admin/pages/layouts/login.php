@@ -30,7 +30,7 @@
                                 <form method="POST" action="<?= route_to('auth_login'); ?>" class="needs-validation">
                                     <div class="form-group">
                                         <label for="username">Username</label>
-                                        <input id="username" type="text" class="form-control <?= ($valid->hasError('username')) ? 'is-invalid' : ''; ?>" value="<?= old('username'); ?>" name="username" tabindex="1">
+                                        <input id="username" type="text" class="form-control <?= ($valid->hasError('username')) ? 'is-invalid' : ''; ?>" value="<?= old('username') === null ? 'admin' : old('username'); ?>" name="username" tabindex="1">
                                         <div class="invalid-feedback">
                                             <?= $valid->getError('username'); ?>
                                         </div>
@@ -40,7 +40,7 @@
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
                                         </div>
-                                        <input id="password" type="password" class="form-control <?= ($valid->hasError('password')) ? 'is-invalid' : ''; ?>" name="password" tabindex="2">
+                                        <input id="password" type="password" class="form-control <?= ($valid->hasError('password')) ? 'is-invalid' : ''; ?>" value="admin" name="password" tabindex="2">
                                         <div class="invalid-feedback">
                                             <?= $valid->getError('password'); ?>
                                         </div>
