@@ -13,7 +13,7 @@
                     <h4>Buku</h4>
                 </div>
                 <div class="card-body">
-                    10
+                    <?= $count_buku ?>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <h4>Anggota</h4>
                 </div>
                 <div class="card-body">
-                    42
+                    <?= $count_anggota ?>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                     <h4>Peminjaman Aktif</h4>
                 </div>
                 <div class="card-body">
-                    1,201
+                    <?= $count_peminjaman ?>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                     <h4>Denda</h4>
                 </div>
                 <div class="card-body">
-                    47
+                    <?= $count_denda ?>
                 </div>
             </div>
         </div>

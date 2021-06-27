@@ -116,8 +116,8 @@ $routes->group('admin', ['filter' => 'is_not_login'], function ($routes) {
 	$routes->group('transaksi', function ($routes) {
 		$routes->get('/', 'Transaksi::index', ['as' => 'view_transaksi']);
 		$routes->get('add', 'Transaksi::add', ['as' => 'view_add_transaksi']);
-		$routes->post('save', 'Pegawai::save', ['as' => 'save_pegawai']);
-		$routes->delete('(:any)', 'Pegawai::delete/$1', ['as' => 'delete_pegawai']);
+		$routes->post('save', 'Transaksi::save', ['as' => 'save_transaksi']);
+		$routes->delete('(:any)', 'Transaksi::delete/$1', ['as' => 'delete_transaksi']);
 		$routes->get('(:any)', 'Pegawai::edit/$1', ['as' => 'view_edit_pegawai']);
 		$routes->post('(:any)', 'Pegawai::update/$1', ['as' => 'update_pegawai']);
 	});

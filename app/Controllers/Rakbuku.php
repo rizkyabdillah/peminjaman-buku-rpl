@@ -26,9 +26,7 @@ class Rakbuku extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_rakbuku_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getDataOrderByArray('RAK_BUKU', 'nomor_rak', 'ASC');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_rakbuku'),
@@ -113,9 +111,7 @@ class Rakbuku extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_rakbuku_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('RAK_BUKU', ['id_rak' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -124,7 +120,7 @@ class Rakbuku extends BaseController
             'desc_badges' => 'Ubah data rak buku pada form dibawah ini',
             'text_header_form' => 'Ubah Rak Buku',
             'valid' => $this->validation,
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-rakbuku', array_merge($this->array_default(), $components));

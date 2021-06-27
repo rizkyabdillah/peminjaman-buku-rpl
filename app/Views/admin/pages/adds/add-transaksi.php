@@ -24,15 +24,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="nama_buku">Nomor Transaksi</label>
-                        <input type="text" class="form-control" name="nomor_rak" value="<?= $id_transaksi ?>" readonly>
+                        <input type="text" class="form-control" id="id_transaksi" value="<?= $id_transaksi ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="nomor_rak">Tanggal Pinjam</label>
-                        <input type="text" class="form-control" name="nomor_rak" value="<?= date("Y-m-d H:i:s") ?>" readonly>
+                        <input type="text" class="form-control" id="tanggal_pinjam" value="<?= date("Y-m-d H:i:s") ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="nomor_rak">Tanggal Kembali</label>
-                        <input type="text" class="form-control" name="nomor_rak" value="<?= date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s") . ' + 7 days')) ?>" readonly>
+                        <input type="text" class="form-control" id="tanggal_kembali" value="<?= date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s") . ' + 7 days')) ?>" readonly>
                     </div>
                 </div>
             </div>
@@ -251,6 +251,29 @@
             swal('Warning', 'Buku yang dipinjam masih kosong!', 'warning', {
                 buttons: false,
                 timer: 1000,
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "<?= route_to('save_transaksi') ?>",
+                cache: false,
+                data: {
+                    id_transaksi: $('#id_transaksi').val(),
+                    id_anggota: $('#data_anggota').val(),
+                    tanggal_pinjam: $('#tanggal_pinjam').val(),
+                    tanggal_kembali: $('#tanggal_kembali').val(),
+                    arr_buku: array_buku
+                },
+                success: function(data) {
+                    swal('Informasi', 'Data berhasil disimpan!', 'success').then((data) => {
+                        if (data) {
+                            window.location.href = '<?= route_to("view_transaksi") ?>';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                }
             });
         }
     });

@@ -109,25 +109,51 @@ class CrudModel extends Model
     {
         return $this->getBuilder($table)->select($column)->where($filter)->get()->getResultArray();
     }
-    
+
     // Ambil semua data dengan pengurutan
-    public function getDataOrderByObj($table, $order_by)
+    public function getDataOrderByObj($table, $column, $clause)
     {
-        return $this->getBuilder($table)->orderBy($order_by)->get()->getResult();
+        return $this->getBuilder($table)->orderBy($column, $clause)->get()->getResult();
     }
 
-    public function getDataOrderByArray($table, $order_by)
+    public function getDataOrderByArray($table, $column, $clause)
     {
-        return $this->getBuilder($table)->orderBy($order_by)->get()->getResultArray();
+        return $this->getBuilder($table)->orderBy($column, $clause)->get()->getResultArray();
     }
-
-
 
     // Ambil data spesifik
     public function getRowDataArray($table, $filter)
     {
-
         return $this->getBuilder($table)->where($filter)->get()->getRowArray();
+    }
+
+    // Ambil data maksimal
+    public function getSelectMax($table, $column, $aliases)
+    {
+        return $this->getBuilder($table)->selectMax($column, $aliases)->get()->getRowArray();
+    }
+
+    // Ambil data minimal
+    public function getSelectMin($table, $column, $aliases)
+    {
+        return $this->getBuilder($table)->selectMin($column, $aliases)->get()->getRowArray();
+    }
+
+    // Ambil data total (SUM)
+    public function getSelectSum($table, $column, $aliases)
+    {
+        return $this->getBuilder($table)->selectSum($column, $aliases)->get()->getRowArray();
+    }
+
+    // Ambil data hitung total row / baris (SUM)
+    public function getSelectCount($table, $column, $aliases)
+    {
+        return $this->getBuilder($table)->selectCount($column, $aliases)->get()->getRowArray();
+    }
+
+    public function getSelectCountWhere($table, $column, $aliases, $filter)
+    {
+        return $this->getBuilder($table)->selectCount($column, $aliases)->where($filter)->get()->getRowArray();
     }
 
 

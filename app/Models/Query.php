@@ -15,36 +15,6 @@ class Query
         return "SELECT BUKU.id_buku, BUKU.nama_buku, KATEGORI_BUKU.nama_kategori, PENERBIT.nama_penerbit, PENGARANG.nama_pengarang, BUKU.jumlah_halaman, BUKU.gambar FROM BUKU, KATEGORI_BUKU, PENERBIT, PENGARANG WHERE BUKU.id_kategori = KATEGORI_BUKU.id_kategori AND BUKU.id_penerbit = PENERBIT.id_penerbit AND BUKU.id_pengarang = PENGARANG.id_pengarang";
     }
 
-    public function query_buku_show_all()
-    {
-        return "SELECT * FROM BUKU";
-    }
-
-    public function query_buku_show_where($id)
-    {
-        return "SELECT * FROM BUKU WHERE id_buku ='$id'";
-    }
-
-    public function query_katogori_show_all()
-    {
-        return "SELECT * FROM KATEGORI_BUKU";
-    }
-
-    public function query_rak_show_all()
-    {
-        return "SELECT * FROM RAK_BUKU ORDER BY nomor_rak ASC";
-    }
-
-    public function query_kategori_show_all()
-    {
-        return "SELECT * FROM KATEGORI_BUKU";
-    }
-
-    public function query_kategori_show_where($id)
-    {
-        return "SELECT * FROM KATEGORI_BUKU WHERE id_kategori ='$id'";
-    }
-
     public function query_user_show_all()
     {
         return "SELECT * FROM USER";
@@ -65,43 +35,8 @@ class Query
         return "SELECT PEGAWAI.id_pegawai, PEGAWAI.nama_pegawai, PEGAWAI.nomor_telpon, PEGAWAI.jenis_kelamin, USER.username FROM PEGAWAI, USER WHERE PEGAWAI.id_pegawai = USER.id_user";
     }
 
-    // public function query_anggota_show_all()
-    // {
-    //     return "SELECT * FROM anggota";
-    // }
-
-    // public function query_anggota_show_where($id)
-    // {
-    //     return "SELECT * FROM anggota WHERE id_anggota ='$id'";
-    // }
-
-    public function query_rakbuku_show_all()
+    public function query_transaksi()
     {
-        return "SELECT * FROM RAK_BUKU";
-    }
-
-    public function query_rakbuku_show_where($id)
-    {
-        return "SELECT * FROM RAK_BUKU where id_rak ='$id'";
-    }
-
-    public function query_penerbit_show_all()
-    {
-        return "SELECT * FROM PENERBIT";
-    }
-
-    public function query_penerbit_show_where($id)
-    {
-        return "SELECT * FROM PENERBIT WHERE id_penerbit = '$id'";
-    }
-
-    public function query_pengarang_show_all()
-    {
-        return "SELECT * FROM PENGARANG";
-    }
-
-    public function query_pengarang_show_where($id)
-    {
-        return "SELECT * FROM PENGARANG WHERE id_pengarang ='$id'";
+        return "SELECT TRANSAKSI.id_transaksi, TRANSAKSI.tanggal_peminjaman, TRANSAKSI.tanggal_harus_kembali, ANGGOTA.nama_anggota, (SELECT SUM(banyak_buku) FROM DETAIL_PEMINJAMAN WHERE DETAIL_PEMINJAMAN.id_transaksi = TRANSAKSI.id_transaksi) AS banyak_buku, TRANSAKSI.status FROM TRANSAKSI, ANGGOTA WHERE TRANSAKSI.id_anggota = ANGGOTA.id_anggota";
     }
 }

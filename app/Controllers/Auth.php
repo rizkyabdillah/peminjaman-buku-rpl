@@ -48,6 +48,7 @@ class Auth extends BaseController
                 if (password_verify($this->request->getVar('password'), $cek_user['password'])) {
                     session()->set([
                         'is_login' => true,
+                        'id_user' => $cek_user['id_user'],
                         'level' => $cek_user['level']
                     ]);
                     return redirect()->to(route_to('view_dashboard'));

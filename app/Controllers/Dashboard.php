@@ -28,12 +28,20 @@ class Dashboard extends BaseController
     public function index()
     {
 
-        $query = $this->query->query_buku_short();
+        $count_buku = $this->model->getSelectCount('BUKU', 'id_buku', 'count');
+        $count_anggota = $this->model->getSelectCount('ANGGOTA', 'id_anggota', 'count');
+        $count_peminjaman = $this->model->getSelectCount('TRANSAKSI', 'id_transaksi', 'count', ['status' => 'PROGRESS']);
+        $count_denda = $this->model->getSelectCount('DENDA', 'id_denda', 'count');
+
         $components = array(
             'is_show_badge3' => false,
             'desc_badges' => 'Halaman ringkas dan view grafik dari master data',
+            'count_buku' => $count_buku['count'],
+            'count_anggota' => $count_anggota['count'],
+            'count_peminjaman' => $count_peminjaman['count'],
+            'count_denda' => $count_denda['count'],
         );
-
+        // return dd($count_buku);
         return view('admin/pages/layouts/dashboard', array_merge($this->array_default(), $components));
     }
 }

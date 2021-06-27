@@ -26,9 +26,7 @@ class Penerbit extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_penerbit_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getAllDataArray('PENERBIT');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_penerbit'),
@@ -128,10 +126,7 @@ class Penerbit extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_penerbit_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
-
+        $dataset = $this->model->getDataWhereArray('PENERBIT', ['id_penerbit' => $id]);
         $components = array(
             'is_show_badge3' => true,
             'badge_3' => 'Ubah Penerbit',
@@ -139,7 +134,7 @@ class Penerbit extends BaseController
             'desc_badges' => 'Ubah data penerbit pada form dibawah ini',
             'text_header_form' => 'Ubah penerbit',
             'valid' => $this->validation,
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-penerbit', array_merge($this->array_default(), $components));

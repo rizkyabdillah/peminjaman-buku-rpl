@@ -10,10 +10,10 @@ class Buku extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->data_kategori = $this->model->queryArray($this->query->query_katogori_show_all());
-        $this->data_penerbit = $this->model->queryArray($this->query->query_penerbit_show_all());
-        $this->data_pengarang = $this->model->queryArray($this->query->query_pengarang_show_all());
-        $this->data_rak = $this->model->queryArray($this->query->query_rak_show_all());
+        $this->data_kategori = $this->model->getAllDataArray('KATEGORI_BUKU');
+        $this->data_penerbit = $this->model->getAllDataArray('PENERBIT');
+        $this->data_pengarang = $this->model->getAllDataArray('PENGARANG');
+        $this->data_rak = $this->model->getDataOrderByArray('RAK_BUKU', 'nomor_rak', 'ASC');
     }
 
     //--------------------------------------------------------------------
@@ -180,9 +180,7 @@ class Buku extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_buku_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('BUKU', ['id_buku' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -197,7 +195,7 @@ class Buku extends BaseController
             'data_pengarang' => $this->data_pengarang,
             'data_rak' => $this->data_rak,
 
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-buku', array_merge($this->array_default(), $components));

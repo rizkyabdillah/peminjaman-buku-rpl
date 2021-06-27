@@ -14,42 +14,52 @@
         </tr>
     </thead>
     <tbody>
-        <?php //foreach ($dataset as $i) :
-        // $arr = array_values($i);
+        <?php
+        function badg($status)
+        {
+            switch ($status) {
+                case 'PROGRESS':
+                    return 'warning';
+                    break;
+                case 'SELESAI':
+                    return 'primary';
+                    break;
+                case 'DENDA':
+                    return 'danger';
+                    break;
+            }
+        }
+        foreach ($dataset as $i) :
+            $arr = array_values($i);
         ?>
-        <tr>
-            <?php
-            // for ($j = 0; $j < count($arr); $j++) :
-            ?>
-            <td>123456789012</td>
-            <td>2021-08-21 11:02:11</td>
-            <td>2021-08-21 11:02:11</td>
-            <td>Samsul Arif</td>
-            <td>120</td>
-            <td>
-                <div class="badge badge-info">Completed</div>
-            </td>
-            <?php
-            // endfor
-            ?>
-            <td class="text-center" style="align-content:center ;">
-                <li class="media">
-                    <div class="media-cta">
-                        <a href="<?= route_to('view_edit_rakbuku', 0); ?>" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Peminjaman"><i class="fas fa-exclamation-circle"></i> </a>
-                        <a href="<?= route_to('view_edit_rakbuku', 0); ?>" class="btn btn-primary pl-3 pr-3" data-toggle="tooltip" data-original-title="Kelola Pengembalian"><i class="fas fa-th-list"></i> </a>
-                        <a href="#" data-id="<?= 0 ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Transaksi">
-                            <form action="<?= route_to('delete_rakbuku', 0); ?>" method="POST" id="hapus<?= 0 ?>" class="">
-                                <?= csrf_field(); ?>
-                                <input type="hidden" name="_method" value="DELETE" />
-                            </form>
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </div>
-                </li>
-            </td>
-        </tr>
-        <?php //endforeach 
-        ?>
+            <tr>
+                <?php
+                for ($j = 0; $j < count($arr) - 1; $j++) :
+                ?>
+                    <td><?= $arr[$j] ?>
+                    <?php
+                endfor
+                    ?>
+                    <td>
+                        <div class="badge badge-<?= badg($arr[count($arr) - 1]); ?>"><?= $arr[count($arr) - 1] ?></div>
+                    </td>
+                    <td class="text-center" style="align-content:center ;">
+                        <li class="media">
+                            <div class="media-cta">
+                                <a href="<?= route_to('view_edit_rakbuku', $arr[0]); ?>" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Peminjaman"><i class="fas fa-exclamation-circle"></i> </a>
+                                <a href="<?= route_to('view_kelola_pengembalian', $arr[0]); ?>" class="btn btn-primary pl-3 pr-3" data-toggle="tooltip" data-original-title="Kelola Pengembalian"><i class="fas fa-th-list"></i> </a>
+                                <a href="#" data-id="<?= $arr[0] ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Transaksi">
+                                    <form action="<?= route_to('delete_transaksi', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0] ?>" class="">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                    </form>
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </td>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 

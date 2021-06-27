@@ -27,13 +27,13 @@ class Transaksi extends BaseController
     public function index()
     {
 
-        // $query = $this->query->query_rakbuku_show_all();
-        // $dataset = $this->model->queryArray($query);
+        $query = $this->query->query_transaksi();
+        $dataset = $this->model->queryArray($query);
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_transaksi'),
             'desc_badges' => 'Berikut adalah daftar semua data transaksi yang terdaftar',
-            // 'dataset' => $dataset
+            'dataset' => $dataset
         );
 
         return view('admin/pages/layouts/transaksi', array_merge($this->array_default(), $components));
@@ -73,53 +73,53 @@ class Transaksi extends BaseController
 
     public function save()
     {
-        if (!$this->validate([
-            'nomor_rak' => [
-                'label' => 'Nomor Rak',
-                'rules' => 'required|numeric|is_unique[rak_buku.nomor_rak]',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong',
-                    'numeric' => '{field} harus berupa angka',
-                    'is_unique' => '{field} sudah tersedia, harap ganti',
-                ]
-            ]
-        ])) {
-            return redirect()->back()->withInput();
-        };
 
-        /* Set random 5 character for id rakbuku */
-        $id_random = $this->utility->get_random(5);
-
-        /* ======= Saving data ======= */
-
-        // Save field column value to array
         $data = array(
-            'id_rak' => $id_random,
-            'nomor_rak' => $this->request->getPost('nomor_rak'),
+            'id_transaksi' => $this->request->getPost('id_transaksi'),
+            'tanggal_peminjaman' => $this->request->getPost('tanggal_pinjam'),
+            'tanggal_harus_kembali' => $this->request->getPost('tanggal_kembali'),
+            'status' => 'PROGRESS',
+            'id_anggota' => $this->request->getPost('id_anggota'),
+            'id_pegawai' => session()->get('id_user')
         );
+        $this->model->insertData('TRANSAKSI', $data);
 
-        // Save data to rak_buku table
-        $this->model->insertData('rak_buku', $data);
+        $arr_buku = $this->request->getPost('arr_buku');
 
-        /* ======= Show message and redirect back to index rakbuku ======= */
-        // Set message where data successful inserted
-        session()->setFlashData('pesan', 'Data rak buku berhasil disimpan');
-        // Redirected back to index rakbuku
-        return redirect()->to(route_to('view_rakbuku'));
+        foreach ($arr_buku as $value) {
+            $data = array(
+                'id_transaksi' => $this->request->getPost('id_transaksi'),
+                'id_buku' => $value[0],
+                'banyak_buku' => $value[4]
+            );
+            $this->model->insertData('DETAIL_PEMINJAMAN', $data);
+
+            $data = array(
+                'id_transaksi' => $this->request->getPost('id_transaksi'),
+                'id_buku' => $value[0],
+                'banyak_buku_kembali' => 0,
+                'id_denda' => null,
+            );
+            $this->model->insertData('DETAIL_PENGEMBALIAN', $data);
+        }
+        echo json_encode(['status' => 'sukses']);
     }
 
     //--------------------------------------------------------------------
 
     public function delete($id)
     {
-        /* ======= Deleting data from table rak_buku where id = $id ======= */
-        $this->model->deleteData('rak_buku', array('id_rak' => $id));
-
-        /* ======= Show message and redirect back to index rakbuku ======= */
-        // Set message where data successful deleted
-        session()->setFlashData('pesan', 'Data rak buku berhasil dihapus');
-        // Redirected back to index rakbuku
-        return redirect()->to(route_to('view_rakbuku'));
+        $pengembalian = $this->model->getDataWhereArray('DETAIL_PENGEMBALIAN', ['id_transaksi' => $id]);
+        for ($i = 0; $i < count($pengembalian); $i++) {
+            $this->model->deleteData('DENDA', ['id_denda' => $pengembalian[$i]['id_denda']]);
+        }
+        $this->model->deleteData('DETAIL_PENGEMBALIAN', ['id_transaksi' => $id]);
+        $this->model->deleteData('DETAIL_PEMINJAMAN', ['id_transaksi' => $id]);
+        $this->model->deleteData('TRANSAKSI', ['id_transaksi' => $id]);
+        // return dd($pengembalian);
+        // $this->model->deleteData('rak_buku', array('id_rak' => $id));
+        session()->setFlashData('pesan', 'Data transaksi berhasil dihapus');
+        return redirect()->to(route_to('view_transaksi'));
     }
 
     //--------------------------------------------------------------------

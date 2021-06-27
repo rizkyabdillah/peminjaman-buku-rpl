@@ -26,9 +26,7 @@ class Kategori extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_kategori_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getAllDataArray('KATEGORI_BUKU');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_kategori'),
@@ -108,9 +106,7 @@ class Kategori extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_kategori_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('KATEGORI_BUKU', ['id_kategori' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -119,8 +115,7 @@ class Kategori extends BaseController
             'desc_badges' => 'Ubah data kategori pada form dibawah ini',
             'text_header_form' => 'Ubah Kategori',
             'valid' => $this->validation,
-
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-kategori', array_merge($this->array_default(), $components));

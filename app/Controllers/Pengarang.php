@@ -26,9 +26,7 @@ class Pengarang extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_pengarang_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getAllDataArray('PENGARANG');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_pengarang'),
@@ -112,9 +110,7 @@ class Pengarang extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_pengarang_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('PENGARANG', ['id_pengarang' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -123,7 +119,7 @@ class Pengarang extends BaseController
             'desc_badges' => 'Ubah data pengarang pada form dibawah ini',
             'text_header_form' => 'Ubah Pengarang',
             'valid' => $this->validation,
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-pengarang', array_merge($this->array_default(), $components));
