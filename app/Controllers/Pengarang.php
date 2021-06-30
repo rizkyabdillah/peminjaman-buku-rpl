@@ -61,7 +61,7 @@ class Pengarang extends BaseController
         if (!$this->validate([
             'nama_pengarang' => [
                 'label' => 'Nama Pengarang',
-                'rules' => 'required|is_unique[pengarang.nama_pengarang]',
+                'rules' => 'required|is_unique[PENGARANG.nama_pengarang]',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
                     'is_unique' => '{field} sudah tersedia, harap ganti',

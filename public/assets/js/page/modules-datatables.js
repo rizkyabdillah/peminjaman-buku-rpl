@@ -35,7 +35,7 @@ $("[data-checkboxes]").each(function () {
 });
 
 $("#table-0").dataTable({
-  columnDefs: [{ sortable: false, targets: [] }],
+  columnDefs: [{ sortable: false, targets: [2] }],
 });
 
 $("#table-1").dataTable({
@@ -43,7 +43,8 @@ $("#table-1").dataTable({
 });
 
 $("#table-ascending").dataTable({
-  columnDefs: [{ sortable: true, targets: [0, 2, 3] }],
+  columnDefs: [{ sortable: true }],
+  order: [1, "asc"],
 });
 
 $("#table-descending").dataTable({

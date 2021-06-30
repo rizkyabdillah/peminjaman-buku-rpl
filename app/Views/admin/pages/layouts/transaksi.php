@@ -46,7 +46,7 @@
                     <td class="text-center" style="align-content:center ;">
                         <li class="media">
                             <div class="media-cta">
-                                <a href="<?= route_to('view_edit_rakbuku', $arr[0]); ?>" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Peminjaman"><i class="fas fa-exclamation-circle"></i> </a>
+                                <a href="#" onclick="detailTransaksi('<?= $arr[0]; ?>');" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Peminjaman"><i class="fas fa-exclamation-circle"></i> </a>
                                 <a href="<?= route_to('view_kelola_pengembalian', $arr[0]); ?>" class="btn btn-primary pl-3 pr-3" data-toggle="tooltip" data-original-title="Kelola Pengembalian"><i class="fas fa-th-list"></i> </a>
                                 <a href="#" data-id="<?= $arr[0] ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Transaksi">
                                     <form action="<?= route_to('delete_transaksi', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0] ?>" class="">
@@ -64,6 +64,53 @@
 </table>
 
 <?= $this->endSection(); ?>
+
+
+
+
+<?= $this->section('modal') ?>
+<div class="modal fade in" id="detail_dialog" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-lg-12">
+                    <div class="card card-info">
+                        <div class="card-header ">
+                            <h4>DETAIL PEMINJAMAN</h4>
+                            <div class="card-header-action">
+                                <a href="#" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table-ascending">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 5%;">#</th>
+                                            <th class="text-center" style="width: 15%;">ID</th>
+                                            <th>Nama Buku</th>
+                                            <th>Nama Penerbit</th>
+                                            <th>Nama Pengarang</th>
+                                            <th>Jumlah Halaman</th>
+                                            <th>Banyak Buku</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="modal_body">
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->endSection(); ?>
+
+
 
 <!-- Section CSS -->
 <?= $this->section('page_css'); ?>
@@ -112,5 +159,38 @@
             timer: 1200,
         });
     <?php endif ?>
+
+
+    function detailTransaksi(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?= route_to('detail_transaksi') ?>",
+            cache: false,
+            dataType: 'JSON',
+            data: {
+                id_transaksi: id
+            },
+            success: function(data) {
+                var stringhmlt = "";
+                for (let i = 0; i < data.length; i++) {
+                    stringhmlt +=
+                        '<tr>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td>' + data[i]['id_buku'] + '</td>' +
+                        '<td>' + data[i]['nama_buku'] + '</td>' +
+                        '<td>' + data[i]['nama_penerbit'] + '</td>' +
+                        '<td>' + data[i]['nama_pengarang'] + '</td>' +
+                        '<td>' + data[i]['jumlah_halaman'] + '</td>' +
+                        '<td>' + data[i]['banyak_buku'] + '</td>' +
+                        '</tr>';
+                }
+                $('#modal_body').html(stringhmlt);
+                $('#detail_dialog').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    }
 </script>
 <?= $this->endSection(); ?>

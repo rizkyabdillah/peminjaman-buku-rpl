@@ -39,4 +39,9 @@ class Query
     {
         return "SELECT TRANSAKSI.id_transaksi, TRANSAKSI.tanggal_peminjaman, TRANSAKSI.tanggal_harus_kembali, ANGGOTA.nama_anggota, (SELECT SUM(banyak_buku) FROM DETAIL_PEMINJAMAN WHERE DETAIL_PEMINJAMAN.id_transaksi = TRANSAKSI.id_transaksi) AS banyak_buku, TRANSAKSI.status FROM TRANSAKSI, ANGGOTA WHERE TRANSAKSI.id_anggota = ANGGOTA.id_anggota";
     }
+
+    public function query_detail_peminjaman($id_transaksi)
+    {
+        return "SELECT DETAIL_PEMINJAMAN.id_buku, BUKU.nama_buku, PENERBIT.nama_penerbit, PENGARANG.nama_pengarang, BUKU.jumlah_halaman, DETAIL_PEMINJAMAN.banyak_buku FROM DETAIL_PEMINJAMAN, BUKU, PENERBIT, PENGARANG WHERE DETAIL_PEMINJAMAN.id_buku = BUKU.id_buku AND BUKU.id_penerbit = PENERBIT.id_penerbit AND BUKU.id_pengarang = PENGARANG.id_pengarang AND DETAIL_PEMINJAMAN.id_transaksi = '$id_transaksi'";
+    }
 }

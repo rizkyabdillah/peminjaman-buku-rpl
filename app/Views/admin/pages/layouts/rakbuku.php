@@ -1,7 +1,7 @@
 <?= $this->extend('admin/partials/index-table') ?>
 
 <?= $this->section('table-contents') ?>
-<table class="table table-striped" id="table-0">
+<table class="table table-striped" id="table-ascending">
     <thead>
         <tr>
             <th class="text-center" style="width: 15%;">ID</th>

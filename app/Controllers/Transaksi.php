@@ -80,7 +80,8 @@ class Transaksi extends BaseController
             'tanggal_harus_kembali' => $this->request->getPost('tanggal_kembali'),
             'status' => 'PROGRESS',
             'id_anggota' => $this->request->getPost('id_anggota'),
-            'id_pegawai' => session()->get('id_user')
+            'id_pegawai' => session()->get('id_user'),
+            'id_denda' => null
         );
         $this->model->insertData('TRANSAKSI', $data);
 
@@ -97,8 +98,7 @@ class Transaksi extends BaseController
             $data = array(
                 'id_transaksi' => $this->request->getPost('id_transaksi'),
                 'id_buku' => $value[0],
-                'banyak_buku_kembali' => 0,
-                'id_denda' => null,
+                'banyak_buku_kembali' => 0
             );
             $this->model->insertData('DETAIL_PENGEMBALIAN', $data);
         }
@@ -109,41 +109,28 @@ class Transaksi extends BaseController
 
     public function delete($id)
     {
-        $pengembalian = $this->model->getDataWhereArray('DETAIL_PENGEMBALIAN', ['id_transaksi' => $id]);
-        for ($i = 0; $i < count($pengembalian); $i++) {
-            $this->model->deleteData('DENDA', ['id_denda' => $pengembalian[$i]['id_denda']]);
+        $transaksi = $this->model->getDataWhereArray('TRANSAKSI', ['id_transaksi' => $id]);
+        if ($transaksi) {
+            $this->model->deleteData('DENDA', ['id_denda' => $transaksi[0]['id_denda']]);
         }
         $this->model->deleteData('DETAIL_PENGEMBALIAN', ['id_transaksi' => $id]);
         $this->model->deleteData('DETAIL_PEMINJAMAN', ['id_transaksi' => $id]);
         $this->model->deleteData('TRANSAKSI', ['id_transaksi' => $id]);
-        // return dd($pengembalian);
-        // $this->model->deleteData('rak_buku', array('id_rak' => $id));
         session()->setFlashData('pesan', 'Data transaksi berhasil dihapus');
         return redirect()->to(route_to('view_transaksi'));
     }
 
     //--------------------------------------------------------------------
 
-    public function edit($id)
+    public function detail()
     {
-
-        $query = $this->query->query_rakbuku_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
-
-        $components = array(
-            'is_show_badge3' => true,
-            'badge_3' => 'Ubah Rak Buku',
-            'link_back' => route_to('view_rakbuku'),
-            'desc_badges' => 'Ubah data rak buku pada form dibawah ini',
-            'text_header_form' => 'Ubah Rak Buku',
-            'valid' => $this->validation,
-            'dataset' => $dataset,
-        );
-
-        return view('admin/pages/edits/edit-rakbuku', array_merge($this->array_default(), $components));
+        $id = $this->request->getVar('id_transaksi');
+        $query = $this->query->query_detail_peminjaman($id);
+        $peminjaman = $this->model->queryArray($query);
+        echo json_encode($peminjaman);
     }
 
-    // //--------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
 
     public function update($id)
