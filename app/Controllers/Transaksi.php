@@ -132,38 +132,110 @@ class Transaksi extends BaseController
 
     //--------------------------------------------------------------------
 
+    public function pengembalian($id)
+    {
+        $data_transaksi = $this->model->getRowDataArray('TRANSAKSI', ['id_transaksi' => $id]);
+        $data_anggota = $this->model->getRowDataArray('ANGGOTA', ['id_anggota' => $data_transaksi['id_anggota']]);
+        $data_buku_belum_kembali = $this->model->queryArray($this->query->query_buku_belum_kembali($id));
+        $data_buku_sudah_kembali = $this->model->queryArray($this->query->query_buku_sudah_kembali($id));
+
+        $dataset = [
+            'data_transaksi' => $data_transaksi,
+            'data_anggota' => $data_anggota,
+            'data_buku' => $data_buku_belum_kembali,
+            'dataset_buku' => $data_buku_sudah_kembali,
+        ];
+
+        $components = array(
+            'is_show_badge3' => true,
+            'badge_3' => 'Kelola Pengembalian',
+            'link_back' => route_to('view_transaksi'),
+            'desc_badges' => 'Tambahkan data pengembalian buku pada form dibawah ini',
+            'text_header_form' => 'Tambah Pengembalian Buku',
+            'dataset' => $dataset,
+            'id_transaksi' => $id,
+            'valid' => $this->validation
+        );
+
+        return view('admin/pages/adds/add-pengembalian', array_merge($this->array_default(), $components));
+    }
+
+    //--------------------------------------------------------------------
+
 
     public function update($id)
     {
-        if (!$this->validate([
-            'nomor_rak' => [
-                'label' => 'Nomor Rak',
-                'rules' => 'required|numeric|is_unique[rak_buku.nomor_rak, id_rak, ' . $id . ']',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong',
-                    'numeric' => '{field} harus berupa angka',
-                    'is_unique' => '{field} sudah tersedia, harap ganti',
+        $transaksi = $this->model->getRowDataArray('TRANSAKSI', ['id_transaksi' => $id]);
+
+        $tanggal_kembali = date_create($transaksi['tanggal_harus_kembali']);
+        $tanggal_sekarang = date_create(date("Y-m-d H:i:s"));
+
+        $terlambat = date_diff($tanggal_kembali, $tanggal_sekarang);
+        $hari = $terlambat->format("%R%a");
+
+        $arr_buku = $this->request->getPost('arr_buku');
+
+        foreach ($arr_buku as $value) {
+            $count_buku = $this->model->getDataColumnWhereArray(
+                'DETAIL_PENGEMBALIAN',
+                'banyak_buku_kembali',
+                [
+                    'id_transaksi' => $id,
+                    'id_buku' => $value[0],
                 ]
-            ]
-        ])) {
-            return redirect()->back()->withInput();
-        };
+            );
+            $this->model->updateDataFilter(
+                'DETAIL_PENGEMBALIAN',
+                [
+                    'id_transaksi' => $id,
+                    'id_buku' => $value[0],
+                ],
+                [
+                    'banyak_buku_kembali' => ($count_buku[0]['banyak_buku_kembali'] + $value[4])
+                ]
+            );
+        }
 
-        /* ======= Saving data ======= */
+        if (($hari + 1) > 0) {
 
-        // Save field column value to array
-        $data = array(
-            'nomor_rak' => $this->request->getPost('nomor_rak'),
-        );
+            $banyak_buku = 0;
+            foreach ($arr_buku as $value) {
+                $banyak_buku += $value[4];
+            }
 
-        // Update data to rak_buku table
-        $this->model->updateData('rak_buku', 'id_rak', $id, $data);
+            if ($transaksi['id_denda'] == null) {
+                $id_denda = $this->utility->get_random(5);
+                $this->model->updateData('TRANSAKSI', 'id_transaksi', $id, ['id_denda' => $id_denda]);
 
-        /* ======= Show message and redirect back to index rak_buku ======= */
-        // Set message where data successful inserted
-        session()->setFlashData('pesan', 'Data rak buku berhasil diubah');
-        // Redirected back to index rak_buku
-        return redirect()->to(route_to('view_rakbuku'));
+                $data = [
+                    'id_denda' => $id_denda,
+                    'status_bayar' => 'BELUM LUNAS',
+                    'banyak_buku' => $banyak_buku,
+                    'total_denda' => ($banyak_buku * ($hari + 1) * 1000),
+                    'total_bayar' => 0
+                ];
+                $this->model->insertData('DENDA', $data);
+            } else {
+                $denda = $this->model->getRowDataArray('DENDA', ['id_denda' => $transaksi['id_denda']]);
+                $total_denda = ($banyak_buku * ($hari + 1) * 1000) + $denda['total_denda'];
+                $total_buku = $denda['banyak_buku'] + $banyak_buku;
+
+                $this->model->updateData('DENDA', 'id_denda', $transaksi['id_denda'], [
+                    'banyak_buku' => $total_buku,
+                    'total_denda' => $total_denda
+                ]);
+            }
+
+            $data_buku_belum_kembali = $this->model->queryArray($this->query->query_buku_belum_kembali($id));
+            if (!$data_buku_belum_kembali) {
+                $this->model->updateData('TRANSAKSI', 'id_transaksi', $id, [
+                    'status' => 'DENDA'
+                ]);
+            }
+        }
+
+
+        echo json_encode(['status' => 'sukses']);
     }
 
 

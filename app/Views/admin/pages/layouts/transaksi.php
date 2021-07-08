@@ -47,7 +47,7 @@
                         <li class="media">
                             <div class="media-cta">
                                 <a href="#" onclick="detailTransaksi('<?= $arr[0]; ?>');" class="btn btn-info pl-3 pr-3" data-toggle="tooltip" data-original-title="Detail Peminjaman"><i class="fas fa-exclamation-circle"></i> </a>
-                                <a href="<?= route_to('view_kelola_pengembalian', $arr[0]); ?>" class="btn btn-primary pl-3 pr-3" data-toggle="tooltip" data-original-title="Kelola Pengembalian"><i class="fas fa-th-list"></i> </a>
+                                <a href="<?= route_to('view_pengembalian', $arr[0]); ?>" class="btn btn-primary pl-3 pr-3" data-toggle="tooltip" data-original-title="Kelola Pengembalian"><i class="fas fa-th-list"></i> </a>
                                 <a href="#" data-id="<?= $arr[0] ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Transaksi">
                                     <form action="<?= route_to('delete_transaksi', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0] ?>" class="">
                                         <?= csrf_field(); ?>

@@ -4,8 +4,6 @@
 
 
 <div class="row">
-
-
     <div class="col-12 col-md-6 col-lg-12">
         <div class="card card-info">
             <div class="card-body">
@@ -23,15 +21,15 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="nama_buku">Nomor Transaksi</label>
+                        <label>Nomor Transaksi</label>
                         <input type="text" class="form-control" id="id_transaksi" value="<?= $id_transaksi ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="nomor_rak">Tanggal Pinjam</label>
+                        <label>Tanggal Pinjam</label>
                         <input type="text" class="form-control" id="tanggal_pinjam" value="<?= date("Y-m-d H:i:s") ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="nomor_rak">Tanggal Kembali</label>
+                        <label>Tanggal Kembali</label>
                         <input type="text" class="form-control" id="tanggal_kembali" value="<?= date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s") . ' + 7 days')) ?>" readonly>
                     </div>
                 </div>
@@ -80,8 +78,9 @@
 
                 <hr class="mt-2 mb-5">
 
+                <h5 class="text-center mb-2">Buku yang dipinjam sementara</h5>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-lg">
+                    <table class="table table-striped" id="table-0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -115,12 +114,14 @@
         </div>
     </div>
 </div>
-</div>
 
 <?= $this->endSection(); ?>
 
 <!-- Section CSS -->
 <?= $this->section('page_css'); ?>
+<link rel="stylesheet" href="<?= base_url(); ?>/assets/modules/datatables/datatables.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= base_url() ?>/assets/modules/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="<?= base_url() ?>/assets/modules/jquery-selectric/selectric.css">
 <?= $this->endSection(); ?>
@@ -128,6 +129,9 @@
 
 <!-- Section JS Page Modules -->
 <?= $this->section('page_modules'); ?>
+<script src="<?= base_url(); ?>/assets/modules/datatables/datatables.min.js"></script>
+<script src="<?= base_url(); ?>/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 <script src="<?= base_url() ?>/assets/modules/select2/dist/js/select2.full.min.js"></script>
 <script src="<?= base_url() ?>/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
 <?= $this->endSection(); ?>
@@ -135,7 +139,7 @@
 
 <!-- Section JS Page Before JS -->
 <?= $this->section('page_beforejs'); ?>
-
+<script src="<?= base_url(); ?>/assets/js/page/modules-datatables.js"></script>
 <?= $this->endSection(); ?>
 
 
@@ -149,9 +153,8 @@
     });
 
     $('#data_buku').change(function() {
-        var index_buku = $('#data_buku').prop('selectedIndex');
-        var arrays = <?php echo json_encode($dataset['data_buku']) ?>
-
+        let index_buku = $('#data_buku').prop('selectedIndex');
+        var arrays = <?php echo json_encode($dataset['data_buku']) ?>;
         if (index_buku == 0) {
             kosongkan();
         } else {

@@ -110,16 +110,17 @@ $routes->group('admin', ['filter' => 'is_not_login'], function ($routes) {
 		$routes->post('save', 'Pegawai::save', ['as' => 'save_pegawai']);
 		$routes->delete('(:any)', 'Pegawai::delete/$1', ['as' => 'delete_pegawai']);
 		$routes->get('(:any)', 'Pegawai::edit/$1', ['as' => 'view_edit_pegawai']);
-		$routes->post('(:any)', 'Pegawai::update/$1', ['as' => 'update_pegawai']);
+		$routes->post('c', 'Pegawai::update/$1', ['as' => 'update_pegawai']);
 	});
 
 	$routes->group('transaksi', function ($routes) {
 		$routes->get('/', 'Transaksi::index', ['as' => 'view_transaksi']);
 		$routes->get('add', 'Transaksi::add', ['as' => 'view_add_transaksi']);
 		$routes->post('save', 'Transaksi::save', ['as' => 'save_transaksi']);
+		$routes->post('(:any)', 'Transaksi::update/$1', ['as' => 'update_pengembalian']);
 		$routes->delete('(:any)', 'Transaksi::delete/$1', ['as' => 'delete_transaksi']);
 		$routes->post('detail', 'Transaksi::detail', ['as' => 'detail_transaksi']);
-		// $routes->post('(:any)', 'Pegawai::update/$1', ['as' => 'update_pegawai']);
+		$routes->get('pengembalian/(:any)', 'Transaksi::pengembalian/$1', ['as' => 'view_pengembalian']);
 	});
 });
 
