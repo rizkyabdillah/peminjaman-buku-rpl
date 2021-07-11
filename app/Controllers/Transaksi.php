@@ -232,6 +232,13 @@ class Transaksi extends BaseController
                     'status' => 'DENDA'
                 ]);
             }
+        } else {
+            $peminjaman = $this->model->getSelectSumWhere('DETAIL_PEMINJAMAN', 'banyak_buku', 'qty', ['id_transaksi' => $id]);
+            $pengembalian = $this->model->getSelectSumWhere('DETAIL_PENGEMBALIAN', 'banyak_buku_kembali', 'qty', ['id_transaksi' => $id]);
+
+            if ($peminjaman['qty'] == $pengembalian['qty']) {
+                $this->model->updateData('TRANSAKSI', 'id_transaksi', $id, ['status' => 'SELESAI']);
+            }
         }
 
 

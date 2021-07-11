@@ -145,6 +145,11 @@ class CrudModel extends Model
         return $this->getBuilder($table)->selectSum($column, $aliases)->get()->getRowArray();
     }
 
+    public function getSelectSumWhere($table, $column, $aliases, $filter)
+    {
+        return $this->getBuilder($table)->selectSum($column, $aliases)->where($filter)->get()->getRowArray();
+    }
+
     // Ambil data hitung total row / baris (SUM)
     public function getSelectCount($table, $column, $aliases)
     {
