@@ -116,11 +116,18 @@ $routes->group('admin', ['filter' => 'is_not_login'], function ($routes) {
 	$routes->group('transaksi', function ($routes) {
 		$routes->get('/', 'Transaksi::index', ['as' => 'view_transaksi']);
 		$routes->get('add', 'Transaksi::add', ['as' => 'view_add_transaksi']);
+		$routes->get('pengembalian/(:any)', 'Transaksi::pengembalian/$1', ['as' => 'view_pengembalian']);
 		$routes->post('save', 'Transaksi::save', ['as' => 'save_transaksi']);
+		$routes->post('detail', 'Transaksi::detail', ['as' => 'detail_transaksi']);
 		$routes->post('(:any)', 'Transaksi::update/$1', ['as' => 'update_pengembalian']);
 		$routes->delete('(:any)', 'Transaksi::delete/$1', ['as' => 'delete_transaksi']);
-		$routes->post('detail', 'Transaksi::detail', ['as' => 'detail_transaksi']);
-		$routes->get('pengembalian/(:any)', 'Transaksi::pengembalian/$1', ['as' => 'view_pengembalian']);
+	});
+
+	$routes->group('denda', function ($routes) {
+		$routes->get('/', 'Denda::index', ['as' => 'view_denda']);
+		$routes->delete('(:any)', 'Denda::delete/$1', ['as' => 'delete_denda']);
+		$routes->post('data', 'Denda::datadenda', ['as' => 'datadenda']);
+		$routes->post('/', 'Denda::update', ['as' => 'update_denda']);
 	});
 });
 

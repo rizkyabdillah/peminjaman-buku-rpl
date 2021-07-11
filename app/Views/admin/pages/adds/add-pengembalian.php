@@ -115,7 +115,6 @@
                                 <th>Nama Penerbit</th>
                                 <th>Nama Pengarang</th>
                                 <th style="width: 20%;">Banyak Buku Kembali</th>
-                                <th class="text-center" style="width: 10%;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -133,15 +132,6 @@
                                     <?php
                                     endfor
                                     ?>
-                                    <td class="text-center" style="width: 10%;">
-                                        <a href="#" data-id="<?= $arr[0]; ?>" class="btn btn-danger swal-confirm" data-toggle="tooltip" data-original-title="Hapus Rak Buku">
-                                            <form action="<?= route_to('delete_rakbuku', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                            </form>
-                                            <i class="fas fa-trash"> Hapus</i>
-                                        </a>
-                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>

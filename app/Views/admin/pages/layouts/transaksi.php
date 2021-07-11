@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         <?php
-        function badg($status)
+        function badge($status)
         {
             switch ($status) {
                 case 'PROGRESS':
@@ -41,7 +41,7 @@
                 endfor
                     ?>
                     <td>
-                        <div class="badge badge-<?= badg($arr[count($arr) - 1]); ?>"><?= $arr[count($arr) - 1] ?></div>
+                        <div class="badge badge-<?= badge($arr[count($arr) - 1]); ?>"><?= $arr[count($arr) - 1] ?></div>
                     </td>
                     <td class="text-center" style="align-content:center ;">
                         <li class="media">
@@ -62,7 +62,6 @@
         <?php endforeach ?>
     </tbody>
 </table>
-
 <?= $this->endSection(); ?>
 
 
@@ -74,7 +73,7 @@
         <div class="modal-content">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
-                    <div class="card card-info">
+                    <div class="card card-primary">
                         <div class="card-header ">
                             <h4>DETAIL PEMINJAMAN</h4>
                             <div class="card-header-action">
@@ -164,7 +163,7 @@
     function detailTransaksi(id) {
         $.ajax({
             type: "POST",
-            url: "<?= route_to('detail_transaksi') ?>",
+            url: "<?= base_url() . route_to('detail_transaksi') ?>",
             cache: false,
             dataType: 'JSON',
             data: {

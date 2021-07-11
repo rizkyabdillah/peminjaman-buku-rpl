@@ -84,83 +84,70 @@
             <div class="card-header">
                 <h4 class="d-inline">Histori Terakhir</h4>
                 <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">View All</a>
+                    <a href="<?= route_to('view_transaksi') ?>" class="btn btn-primary">View All</a>
                 </div>
             </div>
             <div class="card-body">
                 <ul class="list-unstyled list-unstyled-border">
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-4.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-warning mb-1 float-right">Progress</div>
-                            <h6 class="media-title"><a href="#">Djaja Suparman</a></h6>
-                            <div class="text-small text-muted">Melakukan Peminjaman Buku <div class="bullet">
-                                </div> <span class="text-primary">Now</span></div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-5.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-info mb-1 float-right">Completed</div>
-                            <h6 class="media-title"><a href="#">Alvin Riananda</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 4 Min</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-2.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-danger mb-1 float-right">Denda</div>
-                            <h6 class="media-title"><a href="#">Wahyu Andika</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 8 Min</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-4.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-warning mb-1 float-right">Progress</div>
-                            <h6 class="media-title"><a href="#">Djaja Suparman</a></h6>
-                            <div class="text-small text-muted">Melakukan Peminjaman Buku <div class="bullet">
-                                </div> <span class="text-primary">Now</span></div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-5.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-info mb-1 float-right">Completed</div>
-                            <h6 class="media-title"><a href="#">Alvin Riananda</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 4 Min</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-2.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-danger mb-1 float-right">Denda</div>
-                            <h6 class="media-title"><a href="#">Wahyu Andika</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 8 Min</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-5.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-info mb-1 float-right">Completed</div>
-                            <h6 class="media-title"><a href="#">Alvin Riananda</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 4 Min</div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-2.png" alt="avatar">
-                        <div class="media-body">
-                            <div class="badge badge-pill badge-danger mb-1 float-right">Denda</div>
-                            <h6 class="media-title"><a href="#">Wahyu Andika</a></h6>
-                            <div class="text-small text-muted">Melakukan Pengembalian Buku<div class="bullet">
-                                </div> 8 Min</div>
-                        </div>
-                    </li>
+                    <?php
+                    function badge($status)
+                    {
+                        switch ($status) {
+                            case 'PROGRESS':
+                                return 'warning';
+                                break;
+                            case 'SELESAI':
+                                return 'primary';
+                                break;
+                            case 'DENDA':
+                                return 'danger';
+                                break;
+                        }
+                    }
+
+                    function status($status)
+                    {
+                        switch ($status) {
+                            case 'PROGRESS':
+                                return 'Melakukan Peminjaman Buku';
+                                break;
+                            case 'SELESAI':
+                                return 'Melakukan Penyelesaian Peminjaman';
+                                break;
+                            case 'DENDA':
+                                return 'Melakukan Pengembalian Telat';
+                                break;
+                        }
+                    }
+
+                    function avatar($status)
+                    {
+                        switch ($status) {
+                            case 'PROGRESS':
+                                return 'avatar-4.png';
+                                break;
+                            case 'SELESAI':
+                                return 'avatar-5.png';
+                                break;
+                            case 'DENDA':
+                                return 'avatar-2.png';
+                                break;
+                        }
+                    }
+                    foreach ($transaksi as $i) :
+                        $arr = array_values($i);
+                    ?>
+                        <li class="media">
+                            <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/<?= avatar($arr[1]) ?>" alt="avatar">
+                            <div class="media-body">
+                                <div class="badge badge-pill badge-<?= badge($arr[1]) ?> mb-1 float-right"><?= $arr[1] ?></div>
+                                <h6 class="media-title"><a href="#"><?= $arr[0] ?></a></h6>
+                                <div class="text-small text-muted"><?= status($arr[1]) ?></div>
+                            </div>
+                        </li>
+                    <?php
+                    endforeach
+                    ?>
                 </ul>
             </div>
         </div>

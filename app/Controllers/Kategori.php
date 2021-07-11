@@ -87,6 +87,7 @@ class Kategori extends BaseController
         // Redirected back to index buku
         return redirect()->to(route_to('view_kategori'));
     }
+
     //--------------------------------------------------------------------
 
     public function delete($id)

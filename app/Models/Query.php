@@ -54,4 +54,14 @@ class Query
     {
         return "SELECT BUKU.nama_buku, PENERBIT.nama_penerbit, PENGARANG.nama_pengarang, DETAIL_PENGEMBALIAN.banyak_buku_kembali FROM DETAIL_PENGEMBALIAN, PENGARANG, PENERBIT, BUKU WHERE DETAIL_PENGEMBALIAN.id_buku = BUKU.id_buku AND BUKU.id_penerbit = PENERBIT.id_penerbit AND BUKU.id_pengarang = PENGARANG.id_pengarang AND DETAIL_PENGEMBALIAN.banyak_buku_kembali > 0 AND DETAIL_PENGEMBALIAN.id_transaksi = '$id_transaksi'";
     }
+
+    public function query_denda()
+    {
+        return "SELECT DENDA.id_denda, ANGGOTA.nama_anggota, TRANSAKSI.tanggal_peminjaman, DENDA.banyak_buku, DENDA.total_denda, DENDA.total_bayar, DENDA.status_bayar FROM DENDA, TRANSAKSI, ANGGOTA WHERE DENDA.id_denda = TRANSAKSI.id_denda AND TRANSAKSI.id_anggota = ANGGOTA.id_anggota";
+    }
+
+    public function query_transaksi_dashboard()
+    {
+        return "SELECT ANGGOTA.nama_anggota, TRANSAKSI.status FROM ANGGOTA, TRANSAKSI WHERE ANGGOTA.id_anggota = TRANSAKSI.id_anggota";
+    }
 }
