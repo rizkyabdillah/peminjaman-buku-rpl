@@ -49,6 +49,7 @@ class Auth extends BaseController
                     session()->set([
                         'is_login' => true,
                         'id_user' => $cek_user['id_user'],
+                        'username' => $cek_user['username'],
                         'level' => $cek_user['level']
                     ]);
                     return redirect()->to(route_to('view_dashboard'));

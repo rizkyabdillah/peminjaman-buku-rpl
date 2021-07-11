@@ -134,7 +134,7 @@ class Rakbuku extends BaseController
         if (!$this->validate([
             'nomor_rak' => [
                 'label' => 'Nomor Rak',
-                'rules' => 'required|numeric|is_unique[rak_buku.nomor_rak, id_rak, ' . $id . ']',
+                'rules' => 'required|numeric|is_unique[RAK_BUKU.nomor_rak, id_rak, ' . $id . ']',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
                     'numeric' => '{field} harus berupa angka',

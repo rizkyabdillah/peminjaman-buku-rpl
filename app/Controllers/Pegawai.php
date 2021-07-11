@@ -122,7 +122,7 @@ class Pegawai extends BaseController
         );
 
         // Save data to pegawai table
-        $this->model->insertData('pegawai', $data);
+        $this->model->insertData('PEGAWAI', $data);
 
         // Save field column value to array
         $data = array(
@@ -133,7 +133,7 @@ class Pegawai extends BaseController
         );
 
         // Save data to user table
-        $this->model->insertData('user', $data);
+        $this->model->insertData('USER', $data);
 
         /* ======= Show message and redirect back to index pegawai ======= */
         // Set message where data successful inserted
@@ -147,9 +147,9 @@ class Pegawai extends BaseController
     public function delete($id)
     {
         /* ======= Deleting data from table pegawai where id = $id ======= */
-        $this->model->deleteData('pegawai', array('id_pegawai' => $id));
+        $this->model->deleteData('PEGAWAI', array('id_pegawai' => $id));
         /* ======= Deleting data from table user where id = $id ======= */
-        $this->model->deleteData('user', array('id_user' => $id));
+        $this->model->deleteData('USER', array('id_user' => $id));
 
         /* ======= Show message and redirect back to index pegawai ======= */
         // Set message where data successful deleted
@@ -242,7 +242,7 @@ class Pegawai extends BaseController
         );
 
         // Update data to pegawai table
-        $this->model->updateData('pegawai', 'id_pegawai', $id, $data);
+        $this->model->updateData('PEGAWAI', 'id_pegawai', $id, $data);
 
         // Save field column value to array
         $data = array(
@@ -251,7 +251,7 @@ class Pegawai extends BaseController
         );
 
         // Update data to user table
-        $this->model->updateData('user', 'id_user', $id, $data);
+        $this->model->updateData('USER', 'id_user', $id, $data);
 
         /* ======= Show message and redirect back to index pegawai ======= */
         // Set message where data successful inserted
