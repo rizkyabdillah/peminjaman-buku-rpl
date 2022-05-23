@@ -9,4 +9,9 @@ class Utility
     {
         return strtoupper(random_string('alnum', $max_random));
     }
+
+    public function get_bcrypt($prefix)
+    {
+        return password_hash($prefix, PASSWORD_BCRYPT);
+    }
 }

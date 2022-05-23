@@ -26,9 +26,7 @@ class Kategori extends BaseController
 
     public function index()
     {
-
-        $query = $this->query->query_kategori_show_all();
-        $dataset = $this->model->queryArray($query);
+        $dataset = $this->model->getAllDataArray('KATEGORI_BUKU');
         $components = array(
             'is_show_badge3' => false,
             'link_add' => route_to('view_add_kategori'),
@@ -62,7 +60,7 @@ class Kategori extends BaseController
     {
         if (!$this->validate([
             'nama_kategori' => [
-                'label' => 'Nama Kategori',
+                'label' => 'Nama kategori',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong'
@@ -72,7 +70,7 @@ class Kategori extends BaseController
             return redirect()->back()->withInput();
         };
 
-        /* Set random 5 character for id buku */
+        /* Set random 5 character for id kategori */
         $id_random = $this->utility->get_random(5);
         /* ======= Saving data ======= */
         // Save field column value to array
@@ -80,22 +78,23 @@ class Kategori extends BaseController
             'id_kategori' => $id_random,
             'nama_kategori' => strtoupper($this->request->getPost('nama_kategori')),
         );
-        // Save data to buku table
-        $this->model->insertData('kategori_buku', $data);
+        // Save data to kategori table
+        $this->model->insertData('KATEGORI_BUKU', $data);
 
-        /* ======= Show message and redirect back to index buku ======= */
+        /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful inserted
         session()->setFlashData('pesan', 'Data kategori berhasil disimpan');
         // Redirected back to index buku
         return redirect()->to(route_to('view_kategori'));
     }
+
     //--------------------------------------------------------------------
 
     public function delete($id)
     {
 
         /* ======= Deleting data from table kategori_buku where id = $id ======= */
-        $this->model->deleteData('kategori_buku', array('id_kategori' => $id));
+        $this->model->deleteData('KATEGORI_BUKU', array('id_kategori' => $id));
 
         /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful deleted
@@ -108,9 +107,7 @@ class Kategori extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_kategori_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('KATEGORI_BUKU', ['id_kategori' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -119,8 +116,7 @@ class Kategori extends BaseController
             'desc_badges' => 'Ubah data kategori pada form dibawah ini',
             'text_header_form' => 'Ubah Kategori',
             'valid' => $this->validation,
-
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-kategori', array_merge($this->array_default(), $components));
@@ -150,7 +146,7 @@ class Kategori extends BaseController
         );
 
         // Update data to kategori table
-        $this->model->updateData('kategori_buku', 'id_kategori', $id, $data);
+        $this->model->updateData('KATEGORI_BUKU', 'id_kategori', $id, $data);
 
         /* ======= Show message and redirect back to index kategori ======= */
         // Set message where data successful inserted
@@ -161,9 +157,6 @@ class Kategori extends BaseController
 
 
     //--------------------------------------------------------------------
-
-
-
 
 
 }

@@ -37,7 +37,7 @@
             echo form_dropdown('data_penerbit', $data, old('data_penerbit'), 'class="form-control selectric "');
             ?>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label>Pilih Pengarang</label>
             <?php
             $data = array();
@@ -47,7 +47,7 @@
             echo form_dropdown('data_pengarang', $data, old('data_pengarang'), 'class="form-control selectric "');
             ?>
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-md-2">
             <label>Pilih Nomor Rak</label>
             <?php
             $data = array();
@@ -102,14 +102,12 @@
 <!-- Section CSS -->
 <?= $this->section('page_css'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>/assets/modules/jquery-selectric/selectric.css">
-<link rel="stylesheet" href="<?= base_url() ?>/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
 <?= $this->endSection(); ?>
 
 
 <!-- Section JS Page Modules -->
 <?= $this->section('page_modules'); ?>
 <script src="<?= base_url() ?>/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
-<script src="<?= base_url() ?>/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
 <?= $this->endSection(); ?>
 
 

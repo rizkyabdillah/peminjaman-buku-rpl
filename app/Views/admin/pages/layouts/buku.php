@@ -11,7 +11,7 @@
             <th>Pengarang</th>
             <th>Jumlah Hlm</th>
             <th class="text-center">Gambar</th>
-            <th class="text-center">Aksi</th>
+            <th class="text-center" style="width: 18%;">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
                     <td><?= $arr[$j]; ?></td>
                 <?php endfor ?>
                 <td class="text-center"><img src="<?= base_url(); ?>/assets/images/buku/<?= $arr[count($arr) - 1]; ?>" width="50" height="70"></td>
-                <td class="text-center">
+                <td class="text-center" style="align-content:center ;">
                     <li class="media">
                         <div class="media-cta">
                             <a href="<?= route_to('view_edit_buku', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Buku"><i class="fas fa-pencil-alt"></i></a>

@@ -1,17 +1,17 @@
 <?= $this->extend('admin/partials/index-form') ?>
 
 <?= $this->section('form-contents') ?>
-<form method="POST" action="<?= route_to('update_kategori', $dataset['id_kategori']); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
+<form method="POST" action="<?= route_to('save_pengarang'); ?>" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
     <!-- CSRF Field -->
     <?= csrf_field(); ?>
 
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="nama_buku">Nama Kategori</label>
-            <input type="text" class="form-control <?= ($valid->hasError('nama_kategori')) ? 'is-invalid' : ''; ?>" name="nama_kategori" value="<?= old('nama_kategori') ? old('nama_kategori') : $dataset['nama_kategori']; ?>" placeholder="Input kategori">
+            <label for="nama_pengarang">Nama Pengarang</label>
+            <input type="text" class="form-control <?= ($valid->hasError('nama_pengarang')) ? 'is-invalid' : ''; ?>" name="nama_pengarang" value="<?= old('nama_pengarang'); ?>" placeholder="Input nama pengarang">
             <div class="invalid-feedback">
-                <?= $valid->getError('nama_kategori'); ?>
+                <?= $valid->getError('nama_pengarang'); ?>
             </div>
         </div>
     </div>

@@ -1,28 +1,41 @@
 <?= $this->extend('admin/partials/index-table') ?>
 
 <?= $this->section('table-contents') ?>
-<table class="table table-striped" id="table-0">
+<table class="table table-striped" id="table-descending">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Kategori</th>
+            <th class="text-center">ID</th>
+            <th>Nama Anggota</th>
+            <th>Nomor Telepon</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Bergabung</th>
             <th class="text-center" style="width: 15%;">Aksi</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <?php foreach ($dataset as $i) :
-                $arr = array_values($i);
-            ?>
-                <?php for ($j = 0; $j < count($arr); $j++) : ?>
+        <?php foreach ($dataset as $i) :
+            $arr = array_values($i);
+        ?>
+            <tr>
+                <?php
+                for ($j = 0; $j < count($arr) - 1; $j++) :
+                    if ($j == 3) :
+                ?>
+                        <td><?= ($arr[$j] == 'L') ? 'Laki - Laki' : 'Perempuan' ?></td>
+                    <?php
+                        continue;
+                    endif
+                    ?>
                     <td><?= $arr[$j]; ?></td>
-                <?php endfor ?>
+                <?php
+                endfor
+                ?>
                 <td class="text-center" style="align-content:center ;">
                     <li class="media">
                         <div class="media-cta">
-                            <a href="<?= route_to('view_edit_kategori', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Kategori"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="#" data-id="<?= $arr[0]; ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Kategori">
-                                <form action="<?= route_to('delete_kategori', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
+                            <a href="<?= route_to('view_edit_anggota', $arr[0]); ?>" class="btn btn-warning pl-3 pr-3" data-toggle="tooltip" data-original-title="Ubah Anggota"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="#" data-id="<?= $arr[0]; ?>" class="btn btn-danger pl-3 pr-3 swal-confirm" data-toggle="tooltip" data-original-title="Hapus Anggota">
+                                <form action="<?= route_to('delete_anggota', $arr[0]); ?>" method="POST" id="hapus<?= $arr[0]; ?>" class="">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE" />
                                 </form>
@@ -31,9 +44,8 @@
                         </div>
                     </li>
                 </td>
-        </tr>
-    <?php endforeach ?>
-    </tr>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 

@@ -47,18 +47,5 @@
 
 <!-- Section JS Page After JS -->
 <?= $this->section('page_afterjs'); ?>
-<script>
-    function previewImg() {
-        const images = document.querySelector('.gambar ');
-        const imagesPreview = document.querySelector(".img-preview");
 
-        const readers = new FileReader();
-
-        readers.readAsDataURL(images.files[0]);
-
-        readers.onload = function(e) {
-            imagesPreview.src = e.target.result;
-        }
-    }
-</script>
 <?= $this->endSection(); ?>

@@ -10,10 +10,10 @@ class Buku extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->data_kategori = $this->model->queryArray($this->query->query_katogori_show_all());
-        $this->data_penerbit = $this->model->queryArray($this->query->query_penerbit_show_all());
-        $this->data_pengarang = $this->model->queryArray($this->query->query_pengarang_show_all());
-        $this->data_rak = $this->model->queryArray($this->query->query_rak_show_all());
+        $this->data_kategori = $this->model->getAllDataArray('KATEGORI_BUKU');
+        $this->data_penerbit = $this->model->getAllDataArray('PENERBIT');
+        $this->data_pengarang = $this->model->getAllDataArray('PENGARANG');
+        $this->data_rak = $this->model->getDataOrderByArray('RAK_BUKU', 'nomor_rak', 'ASC');
     }
 
     //--------------------------------------------------------------------
@@ -142,7 +142,7 @@ class Buku extends BaseController
             'gambar' => $nama_gambar,
         );
         // Save data to buku table
-        $this->model->insertData('buku', $data);
+        $this->model->insertData('BUKU', $data);
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful inserted
@@ -157,7 +157,7 @@ class Buku extends BaseController
     {
         /* ======= Deleting image from public/assets/images/buku/ ======= */
         // Get name image from data deleted
-        $name_image = $this->model->getDataColumnWhereArray('buku', 'gambar', array('id_buku' => $id));
+        $name_image = $this->model->getDataColumnWhereArray('BUKU', 'gambar', array('id_buku' => $id));
         // Setting path to data images
         $path = ROOTPATH . 'public/assets/images/buku/' . $name_image[0]['gambar'];
         // Deleting images using unlink command
@@ -167,7 +167,7 @@ class Buku extends BaseController
             }
         }
         /* ======= Deleting data from table buku where id = $id ======= */
-        $this->model->deleteData('buku', array('id_buku' => $id));
+        $this->model->deleteData('BUKU', array('id_buku' => $id));
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful deleted
@@ -180,9 +180,7 @@ class Buku extends BaseController
 
     public function edit($id)
     {
-
-        $query = $this->query->query_buku_show_where($id);
-        $dataset = $this->model->queryRowArray($query);
+        $dataset = $this->model->getDataWhereArray('BUKU', ['id_buku' => $id]);
 
         $components = array(
             'is_show_badge3' => true,
@@ -197,7 +195,7 @@ class Buku extends BaseController
             'data_pengarang' => $this->data_pengarang,
             'data_rak' => $this->data_rak,
 
-            'dataset' => $dataset,
+            'dataset' => $dataset[0],
         );
 
         return view('admin/pages/edits/edit-buku', array_merge($this->array_default(), $components));
@@ -285,7 +283,7 @@ class Buku extends BaseController
         }
 
         // Update data to buku table
-        $this->model->updateData('buku', 'id_buku', $id, $data);
+        $this->model->updateData('BUKU', 'id_buku', $id, $data);
 
         /* ======= Show message and redirect back to index buku ======= */
         // Set message where data successful inserted
